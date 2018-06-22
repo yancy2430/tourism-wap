@@ -5,10 +5,25 @@ export default {
       "pages/index",
       "pages/detail",
       "pages/trip",
-      "pages/product/list"
+      "pages/product/list",
+      
+      "pages/userCenter/register",
+      "pages/userCenter/about",
+      "pages/userCenter/addAddress",
+      "pages/userCenter/address",
+      "pages/userCenter/collect",
+      "pages/userCenter/commonUse",
+      "pages/userCenter/notice",
+      "pages/userCenter/setting",
+      "pages/userCenter/updateAddress",
+      "pages/userCenter/userCenter",
+      "pages/userCenter/userInfo",
+      "pages/userCenter/problemFeedback",
+
+
     ],
     "theme": {
-      "theme-color": "#3399ff"
+      "theme-color": "#39f"
     },
     "window": {
       "scrollType": "div",
@@ -33,7 +48,7 @@ export default {
           "text": "行程"
         },
         {
-          "pagePath": "pages/user",
+          "pagePath": "pages/userCenter/userCenter",
           "iconName": "user",
           "text": "我的"
         }
@@ -43,20 +58,93 @@ export default {
   },
   data () {
     return {
-      //全局变量
+        //全局变量
       globalData: {
+        searchShow: false,
+        shareMask:false,
+        href: 'http://www.uileader.com/touchui_jdfinance/#/pages/share/greenHand/greenHand',
+        audioShow:false
       },
       WIN_WIDTH:ui.WIN_WIDTH,
       tabIndex: 0,
+      drawerVisibility: false,
+      showMode: 'push',
+      showModeValue: 'push',
+      showPlacement: 'left',
+      showPlacementValue: 'left',
+      tabPaths: [],
       tabBarList: [],
+      isApp: ui.IS_APP,
       navStyle: {},
       tabBar: {},
       tabBarHeight: 56,
-      isApp: ui.IS_APP,
+      toggle: false,
+      offsetX: ui.WIN_WIDTH / 2,
+      togglestyle: 'default',
+      fixedzindex: null,
+      tabbaricon: 'none',
+      hideOnTap: true,
+      tabbarhide: true,
+      canClick: true,
       headerHeight: ui.DEFAULT_HEADER_HEIGHT,
       paths: [],
       barHeight: ui.STATUS_BAR_HEIGHT,
-      showSlideMenu:false
+      height: ui.DEFAULT_CONTENT_HEIGHT,
+      searchValue: '',
+      historyContent: [],
+      showSlideMenu: false,
+      slideMenuControl: false,
+      hotList: [
+        { text: '收纳', tagClass: 'tag-before' },
+        {text: '热卖爆款', tagClass: 'tag-before', hot: 'hot'},
+        { text: '卫衣', tagClass: 'tag-before' },
+        { text: '手机壳', tagClass: 'tag-before' },
+        { text: '电子烟', tagClass: 'tag-before' },
+        { text: '手表男', tagClass: 'tag-before' },
+        { text: '手机支架', tagClass: 'tag-before' },
+        { text: '宿舍', tagClass: 'tag-before' },
+        { text: '内裤男', tagClass: 'tag-before' },
+        { text: '特产', tagClass: 'tag-before' },
+        { text: '护肤套装', tagClass: 'tag-before' },
+        { text: '耳机', tagClass: 'tag-before' },
+        { text: '火鸡面', tagClass: 'tag-before' }
+      ],
+
+      // 分享
+      winHeight: ui.WIN_HEIGHT,
+      winWidth: ui.WIN_WIDTH,
+      shareColumn:[
+        {
+          icon: 'wexin',
+          name: '朋友圈',
+          bgColor: '#41C451',
+          share:'weixin_timeline'
+        }, {
+          icon: 'friends-circle',
+          name: '微信好友',
+          bgColor: '#41C451',
+          share: 'weixin_message'
+        }, {
+          icon: 'QQ',
+          name: 'QQ好友',
+          bgColor: '#27A9EE',
+          share: 'qq'
+        }, {
+          icon: 'weibo',
+          name: '微博',
+          bgColor: '#F53B43',
+          share: 'weibo'
+        }
+      ],
+      showTime: ['0.1s', '0.2s', '0.3s', '0.4s', '0.5s', '0.6s'],
+      hideTime: ['0.6s', '0.5s', '0.4s', '0.3s', '0.2s', '0.1s'],
+      className:'',
+      animationDuration: ['0.1s', '0.2s', '0.3s', '0.4s', '0.5s', '0.6s'],
+      target: 'qq',
+      type: 'link',
+      icon: 'http://images.uileader.com/20180116/96d4b45d-4765-41fd-bc29-85919ddb4057.png',
+      title: '高仿京东金融',
+      content: '官方推出的TOUCH UI应用案例'
     }
   },
   computed: {
@@ -202,6 +290,126 @@ export default {
         }
       }
       return {}
+    },
+getTabBar () {
+      let tabBars = [this.$router.options.tabBar, ...this.$router.options.pageTabBars]
+      for (let i = 0; i < tabBars.length; i++) {
+        if (tabBars[i].paths && tabBars[i].paths.indexOf(this.$route.path) > -1) {
+          return tabBars[i]
+        }
+      }
+      return {}
+    },
+    // 关闭popicon图标导航
+    hidepopicon (e) {
+      if (this.canClick) {
+        this.toggle = false
+        this.canClick = false
+        this.togglestyle = 'closestyle'
+      } else {
+        return false
+      }
+    },
+    // 关闭popicon遮罩
+    popiconMaskhide () {
+      this.canClick = true
+      this.togglestyle = 'default'
+      this.tabbaricon = 'none'
+    },
+
+    // 退出搜索
+    hideFullScreenSearch () {
+      this.globalData.searchShow = false
+      ui.setStatusBarStyle({ style: 'light' })
+    },
+    // 清空历史记录
+    deleteHistory () {
+      this.historyContent = []
+    },
+    // 搜索退出还原状态栏颜色
+    searchHideHandle () {
+      ui.setStatusBarStyle({ style: 'light' })
+    },
+    // 进入搜索设置状态栏颜色为黑色
+    searchShowHandle () {
+      ui.setStatusBarStyle({ style: 'dark' })
+    },
+    // 提交搜索
+    searchSubmit (e) {
+      let value = e.search
+      if (value !== '') {
+        this.historyContent.unshift(value)
+        this.hideFullScreenSearch()
+        ui.showToast({ title: value })
+      }
+      this.searchValue = ''
+    },
+    // 点击热门搜索
+    hotTap (opt) {
+      this.hideFullScreenSearch()
+      ui.showToast({
+        title: this.hotList[opt].text
+      })
+    },
+    // 点击搜索历史
+    historyTap (index) {
+      this.hideFullScreenSearch()
+      ui.showToast({
+        title: this.historyContent[index]
+      })
+    },
+    handleNavIconTap () {
+      this.showSlideMenu = !this.showSlideMenu
+    },
+
+    // 关闭侧滑菜单
+    closeMenu (val) {
+      this.showSlideMenu = false
+      if (val !== 'close') {
+        setTimeout(() => {
+          ui.navigateTo({
+            url: '/pages/userCenter/notice'
+          })
+        }, 200);
+        
+      }
+    },
+
+
+    // 分享
+    maskHide(share) {
+      if(share === 'plus'){
+        this.globalData.shareMask = false
+      }else{
+        // setTimeout(() => {
+          this.globalData.shareMask = false
+        // }, 500);
+        console.log(share)
+        // this.target = val
+        this.target = share
+        ui.share({
+          target: this.target,
+          type: this.type,
+          icon: this.icon,
+          title: this.title,
+          content: this.content,
+          href: this.href
+        }, function () {
+          console.log('分享成功')
+        }, function () {
+          console.log('分享失败')
+        })
+    }
+      
+    },
+    maskShow() {
+      this.className='active'
+      this.animationDuration = this.showTime
+    },
+    columnHide(){
+      this.className = 'hideActive'
+      this.animationDuration=this.hideTime
+      this.globalData.shareMask = false
     }
 
   },
@@ -269,8 +477,107 @@ export default {
         color="{{ tabBar.color }}"
         selected-color="{{ tabBar.selectedColor }}">
     </ui-tab-bar>
+    
+    <!-- tabbar个性按钮示例用到：弹出图标导航菜单 -->
+    <ui-fixed-view top="0" left="0" right="0" style="{{{ 'z-index': '1000' ,'display':tabbaricon}}}">
+      <ui-pop-icon mask-hide-delay="500" blur="light" hide-on-tap="{{hideOnTap}}"  bindhide="hidepopicon($event)" bindmaskhide="popiconMaskhide"  left="{{offsetX}}" ui:model="toggle" class="pop-icon-demo" animate="bounce" >
+        <ui-pop-icon-item item-color="#f9dc66" top="-85" left="{{0 - offsetX / 2 - 48}}">
+          <ui-view class="icon_view">
+            <ui-image src="{{require('./images/icon1.png')}}" width="30"></ui-image>
+          </ui-view>
+        </ui-pop-icon-item>
+        <ui-pop-icon-item item-color="#f9dc66" top="-85" left="{{0 - 24}}">
+          <ui-view class="icon_view">
+            <ui-image src="{{require('./images/icon2.png')}}" width="30"></ui-image>
+          </ui-view>
+        </ui-pop-icon-item>
+        <ui-pop-icon-item item-color="#f9dc66" top="-85" left="{{0 + offsetX / 2}}">
+          <ui-view class="icon_view">
+            <ui-image src="{{require('./images/icon3.png')}}" width="30"></ui-image>
+          </ui-view>
+        </ui-pop-icon-item>
+      </ui-pop-icon>
+    </ui-fixed-view>
+    <ui-fixed-view bottom="25" left="0" right="0" style="{{fixedzindex}}">
+      <ui-view class="{{togglestyle}}" style="text-align:center;width:35px;height:35px;margin:0 auto" bindtap="hidepopicon($event)">
+        <!-- <ui-icon type="plus" color="#555" size="24"></ui-icon> -->
+      </ui-view>
+    </ui-fixed-view>
+
+
   </ui-view>
   </ui-slide-menu>
+  
+    <!-- 搜索 -->
+      <ui-mask class="full-screen-box" top="0" ui:model="globalData.searchShow"  bindhide="searchHideHandle" bindshow="searchShowHandle">
+        <ui-view class="bar" style="{{{ height:barHeight+'px' }}}"></ui-view>
+        <ui-row height="46" class="search_bg">
+          <ui-col vertical-align="middle" align="center" space-left="15">
+            <ui-view class="search">
+              <ui-row height="30">
+                <ui-col vertical-align="middle" align="center" width="30">
+                  <ui-icon type="magnifier" size="16" color="#B5B5B5"></ui-icon>
+                </ui-col>
+                <ui-col vertical-align="middle">
+                  <ui-form bindsubmit="searchSubmit" action="/search">
+                    <ui-input type="search" name="search" ui:model="{{ searchValue }}"  placeholder="搜索" focus="{{ globalData.searchShow }}" show-clear="false"></ui-input>
+                  </ui-form>
+                </ui-col>
+              </ui-row>
+            </ui-view>
+          </ui-col>
+          <ui-col vertical-align="middle" align="center" width="50" bindtap="hideFullScreenSearch">
+            <ui-view class="cancel">取消</ui-view>
+          </ui-col>
+        </ui-row>
+        <ui-view class="search_content" style="{{{ height:height+'px' }}}">
+          <!-- 历史搜索 -->
+          <ui-view class="search_history" ui:if="{{ historyContent.length<1 ? false : true }}">
+            <ui-row height="20" space-bottom="20">
+              <ui-col vertical-align="middle">历史搜索</ui-col>
+              <ui-col vertical-align="middle" align="right" width="30" bindtap="deleteHistory">
+                <ui-icon type="delete2" size="16" color="#C9C9C9"></ui-icon>
+              </ui-col>
+            </ui-row>
+            <ui-view class="history_content">
+              <ui-view ui:for="{{ historyContent }}" bindtap="historyTap(index)">{{ item }}</ui-view>
+            </ui-view>
+          </ui-view>
+          <ui-view class="search_history">
+            <ui-row height="20" space-bottom="20">
+              <ui-col vertical-align="middle">大家都在搜</ui-col>
+            </ui-row>
+            <ui-view class="history_content">
+              <ui-tags
+              data="{{ hotList }}"
+              bindchange="hotTap"
+              selected-class="select-class"
+              ></ui-tags>
+            </ui-view>
+          </ui-view>
+        </ui-view>
+      </ui-mask>
+
+    <!-- 分享 -->
+    <ui-mask ui:model="{{globalData.shareMask}}" class="share_mask" hide-delay="400" top="0" blur="light" bindshow="maskShow" bindtap="columnHide">
+      <ui-view class="column_wrap {{ className }}">
+
+        <ui-view class="column_content" ui:for="{{ shareColumn }}" style="{{{ 'animation-duration':animationDuration[index] }}}" bindtap="maskHide(item.share)">
+          <ui-view >
+            <ui-view style="{{{ 'background-color':item.bgColor }}}">
+              <ui-icon type="{{ item.icon }}" size="30" color="#fff"></ui-icon>
+            </ui-view>
+            <ui-text block>{{ item.name }}</ui-text>
+          </ui-view>
+        </ui-view>
+
+        <ui-view class="close" bindtap="maskHide('plus')">
+          <ui-icon type="close" size="20" color="#5E5E5E"></ui-icon>
+        </ui-view>
+
+      </ui-view>
+    </ui-mask>
+
   </ui-view>
 </template>
 
@@ -280,7 +587,6 @@ export default {
  @import './static/css/animate.css';
  @import './static/css/loading.less';
  @import './static/font/iconfont.css';
- @import './static/icon/iconfont.css';
 * {
     margin: 0;
     padding: 0;
@@ -345,5 +651,625 @@ body {
 
 .router-view {
   width: 100%;
+}
+
+// 示例列表样式
+.sample_list {
+  .ui-row {
+    font-size: 14px;
+    height: 46px;
+    line-height: 46px;
+    color: #333;
+    padding: 0 15px;
+  }
+  .group-title {
+    height: 50px;
+    line-height: 50px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #168AFD;
+    .sign {
+      width: 5px;
+      height: 16px;
+      background-color: #168AFD;
+      border-radius: 5px;
+    }
+    .ui-row {
+      padding: 0 10px;
+      color: #168AFD;
+      .ui-view {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+// 示例title和内容
+.sample_title {
+  background-color: #F7F9FB;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 40px;
+  padding-left: 20px;
+}
+
+.sample_content {
+  padding: 10px 20px;
+  line-height: 30px;
+}
+
+.content_list {
+  list-style: none;
+  background-color: #fff;
+  .ui-view {
+    padding: 0 15px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 14px;
+    color: #666;
+    border-bottom: 1px solid #eee;
+  }
+  .grey-bg {
+    background-color: #f5f5f5;
+  }
+}
+
+// tabbar示例动画
+#tab-bar-3 {
+  .ui-tab-bar-item:nth-child(3) {
+    .icon {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 1px solid rgba(231, 231, 231, 0.8);
+      background-color: #fff;
+    }
+  }
+  .ui-tab-bar-item.active {
+    animation-duration: .5s;
+    animation-fill-mode: both;
+    animation-name: zoomIn;
+  }
+}
+
+#tab-bar-5 {
+  .ui-tab-bar-item:nth-child(3) {
+    .icon {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 1px solid rgba(231, 231, 231, 0.8);
+      background-color: #fff;
+      background-color: #fbd954;
+      box-shadow: 0px -2px 1px #eee;
+      border: 4px solid #fff;
+    }
+    .text {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      margin-left: -13px;
+    }
+  }
+}
+
+.pop-icon-demo {
+  .icon_view {
+    height: 100%;
+    z-index: 999;
+    .mix-flex-center();
+  }
+}
+
+.default {
+  display: none;
+}
+
+.openstyle {
+  z-index: 701;
+  animation: open .5s;
+  animation-fill-mode: forwards;
+  animation-delay: .2s;
+}
+
+@keyframes open {
+  0% {
+    display: block;
+    transform: rotate(0);
+  }
+  100% {
+    display: block;
+    transform: rotate(45deg);
+  }
+}
+
+.closestyle {
+  z-index: 701;
+  animation: close .5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes close {
+  0% {
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+//全屏搜索
+.full-screen-box {
+  z-index: 500;
+  position: absolute!important;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  .mix-1px(0, 0, 1, 0, #ccc);
+  .bar {
+    background-color: #fff;
+  }
+  .search_bg{
+    background-color: #fff;
+  }
+  .search {
+    width: 100%;
+    background: #F4F4F4;
+    border-radius: 3px;
+    .ui-input {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      .ui-input-inner {
+        height: 30px;
+      }
+    }
+    .cancel {
+      color: #909090;
+      font-size: 14px;
+    }
+  }
+
+  .search_content {
+    background-color: #F1F1F1;
+    .search_history {
+      background-color: #fff;
+      padding: 20px;
+      margin-bottom: 5px;
+      .ui-col {
+        font-size: 14px;
+        color: #868686;
+      }
+      .history_content {
+        .ui-view {
+          display: inline-flex;
+          padding: 5px 18px;
+          border-radius: 4px;
+          background-color: #F1F1F1;
+          color: #6B6B6B;
+          font-size: 13px;
+          margin: 10px 5px 0 0;
+          &.hot {
+            color: #E51C2F;
+          }
+        }
+        .tag-before {
+          padding: 5px 18px;
+          border-radius: 4px;
+          background-color: #F1F1F1;
+          color: #6B6B6B;
+          font-size: 13px;
+          margin: 5px 5px 0 0;
+          &.hot {
+            color: #E51C2F;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.rect_wrap {
+  margin: 0px auto;
+  width: 50px;
+  height: 60px;
+  text-align: center;
+  font-size: 10px;
+  .ui-view {
+    background-color: #57C499;
+    height: 100%;
+    width: 6px;
+    display: inline-block;
+    
+    -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+    animation: stretchdelay 1.2s infinite ease-in-out;
+  }
+  div {
+    background-color: #57C499;
+    height: 100%;
+    width: 6px;
+    display: inline-block;
+    
+    -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+    animation: stretchdelay 1.2s infinite ease-in-out;
+  }
+  .rect2 {
+    -webkit-animation-delay: -1.1s;
+    animation-delay: -1.1s;
+  }
+  .rect3 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+  }
+  .rect4 {
+    -webkit-animation-delay: -0.9s;
+    animation-delay: -0.9s;
+  }
+  .rect5 {
+    -webkit-animation-delay: -0.8s;
+    animation-delay: -0.8s;
+  }
+}
+@-webkit-keyframes stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) } 
+  20% { -webkit-transform: scaleY(1.0) }
+}
+@keyframes stretchdelay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }  20% {
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
+}
+
+
+
+//侧滑菜单内容
+.menu{
+  height:100%;
+  text-align:center;
+  padding:10px;
+  // background-color: #3399ff;
+  background:linear-gradient(45deg, #4364DF, #39A6ED);
+  position:relative;
+  .slide_top{
+    .ui-image-container{
+      display:inline-block;
+      margin-top:10px;
+    }
+    .ui-view,
+    .ui-text{
+      color: #fff;
+      font-size:16px;
+      margin-top:10px;
+    }
+    .ui-text{
+      // width:80px;
+      font-size:12px;
+      background: rgba(0, 0, 0, 0.1);
+      line-height:16px;
+      display:inline-block;
+      border-radius:25px;
+      padding:5px 15px;
+      margin-bottom:50px;
+    }
+  }
+  .slide_content{
+    background: rgba(0, 0, 0, 0.1);
+    border-radius:5px;
+    padding-bottom:10px;
+    margin-top:10px;
+    .ui-view{
+      font-size:14px;
+    }
+  }
+  .slide_bottom{
+  width:100%;
+  position:absolute;
+  left:0;
+  bottom:5px;
+  .ui-view{
+    width: 40px;
+    height:40px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.1);
+    margin:0px auto;
+    .ui-image {
+      width:20px;
+      height:20px; 
+      margin:10px auto;
+    }
+  }
+}
+}
+
+// 分享
+
+.share_mask{
+  .column_wrap{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding-bottom: 60px;
+    .column_content{
+      width: 25%;
+      height: 80px;
+      text-align: center;
+      margin-bottom: 20px;
+      .mix-flex-center();
+      &>.ui-view{
+        width: 100%;
+        .ui-view{
+          display: inline-block;
+          width:50px;
+          height: 50px;
+          background-color: #41C451;
+          border-radius: 50%;
+          line-height: 50px;
+          text-align: center;
+          margin-bottom: 5px;
+        }
+        .ui-text{
+          font-size: 14px;
+          color: #2C2C2C;
+        }
+      }
+      
+    }
+    .close{
+      margin-top: 20px;
+      width: 100%;
+      text-align: center;
+    }
+
+    &.active{
+      .column_content,
+      .close{
+        animation: showMove ease 1;
+        transform:translate(0px,0px);
+      }
+      .close{
+        animation-duration:0.6
+      }
+    }
+    &.hideActive{
+      .column_content,
+      .close{
+        animation: hideMove ease 1;
+        transform:translate(0px,500px);
+      }
+      .close{
+        animation-duration:0.1;
+      }
+    }
+  }
+}
+
+@keyframes showMove{
+  0% {
+    transform:translate(0px,500px);
+  }
+  50%{
+    transform:translate(0px,-30px);
+  }
+  100% {
+   transform:translate(0px,0px);
+  }
+}
+
+@keyframes hideMove{
+  0% {
+    transform:translate(0px,0px);
+  }
+  50%{
+    transform:translate(0px,-30px);
+  }
+  100% {
+   transform:translate(0px,500px);
+  }
+}
+
+
+// 音频模块
+.ui-fixed-view.audio_bottom{
+  width: 94%;
+  left:3%;
+  right:3%;
+  bottom:10px;
+  border-radius: 5px;
+  background-color: #9a9a9a;
+  overflow: hidden;
+  transition: bottom 0.5s ease-in;
+  .ui-row{
+    .ui-view{
+      font-size:12px;
+      color: #fff;
+      width: 100%;
+      .mix-text-overflow();
+    }
+    .ui-text{
+      font-size:10px;
+      color:#d8d8d8;
+    }
+    .ui-col{
+      position: relative;
+      transition: all 0.35s ease-in;
+      .paly_icon{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+      }
+      &.active{
+        .ui-icon{
+          transition: opacity 0.25s ease-in;
+          opacity: 0;
+        }
+      }
+    }
+  }
+  &.active{
+    bottom: -100px;
+  }
+}
+
+
+// 音频模版内容
+
+
+.audio_content{
+  display:flex;
+  flex-direction:column;
+
+  .text{
+    text-align: center;
+    line-height: 60rpx;
+  }
+  .text1{
+    font-size: 16px;
+  }
+  .left_val{
+    text-align: right;
+    padding-right:20px;
+    line-height: 25px;
+    color: #ADADAD;
+    font-size: 14px;
+  }
+  .right_val{
+    text-align: left;
+    padding-left:20px; 
+    line-height: 25px;
+    color: #ADADAD;
+    font-size: 14px;
+  }
+
+
+  .play_win{
+    .ui-icon{
+      line-height: 60px;
+    }
+  }
+  .songBar_content{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+    .bottom_bar {
+      width:100%;
+      border-top: 1px solid #EBEBEB;
+      background-color: #FBF9FE;
+      .ui-text{
+        font-size: 14px;
+        color: #A5A5A5;
+      }
+    }
+  }
+  .audio_head{
+    flex: 0 0 50rpx;
+    text-align: center;
+  }
+  .songImg{
+    flex: 1;
+    padding: 10px;
+    .ui-image {
+      margin: 0 auto;
+      box-shadow: 0px 3px 13px 0px #ccc;
+    }
+  }
+  .songText{
+    flex: 0 0 160rpx;
+  }
+  .songText2{
+    flex: 0 0 100rpx;
+  }
+  .songPlay{
+    flex: 0 0 180rpx;
+  }
+  .songBar{
+    flex: 0 0 140rpx;
+  }
+  // .ui-row{
+  //   flex: 0 0 140rpx;
+  // }
+}
+.audio_play_list{
+  box-shadow: 0 0 25px 0 #ccc;
+}
+.audio_play_list_wrap {
+  position: relative;
+  height: 100%;
+  .icon-close {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%) scale(4);
+    font-size: 24rpx;
+  } 
+  .newBar{
+    border-bottom: 1px solid #ececec;
+  }
+  .list_title{
+    .ui-text{
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .ui-icon{
+      font-size: 18px;
+    }
+  }
+  .list_content{
+    padding: 10px;
+    height: 250px;
+    overflow: scroll;
+  }
+  .song_name{
+    line-height: 25px;
+    border-bottom: 1px solid #ececec;
+    padding: 5px 0;
+    .songname{
+      font-size: 16px;
+      color: #333;
+    }
+    .singername{
+      font-size: 12px;
+      color: #888;
+    }
+  }
+  .nowSong{
+    .songname{
+      color: #FF9D1F;
+    }
+    .singername{
+      color: #FF9D1F;
+    }
+  }
+}
+
+// 修改tabBar样式
+.ui-tab-bar{
+  box-shadow: 0 4px 16px 0 #ccc;
 }
 </style>

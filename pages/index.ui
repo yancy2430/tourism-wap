@@ -10,8 +10,8 @@
             <ui-icon type="map" size="18" color="#fff"></ui-icon>北京市
           </ui-view>
         </ui-col>
-        <ui-col vertical-align="middle" align="center" space="20">
-          <ui-view class="search">
+        <ui-col vertical-align="middle" align="center" space="20" bindtap="showFullScreenSearch">
+          <ui-view class="search" >
             <ui-row height="35">
               <ui-col vertical-align="middle" align="center" width="40">
                 <ui-icon type="magnifier" size="18" color="#fff"></ui-icon>
@@ -42,19 +42,19 @@
       <ui-row class="icon" space-bottom="10">
 
   <ui-col align="center" bindtap="toProductList">
-      <ui-icon type="yinhangqia" size="40" color="#666"></ui-icon>
+      <ui-icon type="tabBar" size="40" color="#666"></ui-icon>
       <ui-text class="price2">门市价</ui-text>
   </ui-col>
   <ui-col align="center">
-      <ui-icon type="yinhangqia" size="40" color="#666"></ui-icon>
+      <ui-icon type="tabBar" size="40" color="#666"></ui-icon>
       <ui-text class="price2">门市价</ui-text>
   </ui-col>
   <ui-col  align="center">
-      <ui-icon type="yinhangqia" size="40" color="#666"></ui-icon>
+      <ui-icon type="tabBar" size="40" color="#666"></ui-icon>
       <ui-text class="price2">门市价</ui-text>
   </ui-col>
   <ui-col align="center">
-      <ui-icon type="yinhangqia" size="40" color="#666"></ui-icon>
+      <ui-icon type="tabBar" size="40" color="#666"></ui-icon>
       <ui-text class="price2">门市价</ui-text>
   </ui-col>
 </ui-row>
@@ -140,7 +140,12 @@ export default {
         ui.navigateTo({
           url: 'product/list?id=1'
         })
-    }
+    },
+    showFullScreenSearch () {
+      ui.getApp().globalData.searchShow = true
+      ui.setStatusBarStyle({ style: 'dark' })
+    },
+
   },
 
 };
