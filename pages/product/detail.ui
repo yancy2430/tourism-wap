@@ -1,0 +1,1314 @@
+<template>
+  <ui-page show-loading="{{isloading}}" auto-hide-loading="{{false}}">
+    <ui-nav-bar class="ui-nav-bar" slot="nav-bar" ui:show="{{swiper1}}">
+      <ui-row height="46">
+        <ui-col vertical-align="middle" width="80" bindtap="handleBack">
+          <ui-icon type="arrow-left" font-size="24"></ui-icon>
+        </ui-col>
+        <ui-col align="center" vertical-align="middle">
+          <ui-text>产品详情</ui-text>
+        </ui-col>
+        <ui-col width="80"></ui-col>
+      </ui-row>
+    </ui-nav-bar>
+
+    <ui-nav-bar class="ui-nav-bar" slot="nav-bar" ui:show="{{swiper2}}">
+      <ui-row height="46" style="line-height:1">
+        <ui-col width="40" vertical-align="middle" bindtap="backTop">
+          <ui-icon type="arrow-left" font-size="24"></ui-icon>
+        </ui-col>
+        <ui-col align="center" vertical-align="middle">
+            <ui-tabs index="{{ current2 }}" width="{{width-80}}" tab-style="{{tabStyle}}" auto-width="{{false}}"  bindchange="handleChange($event, 'current2')">
+              <ui-tab>商品</ui-tab>
+              <ui-tab>详情</ui-tab>
+              <ui-tab>评价</ui-tab>
+            </ui-tabs>
+        </ui-col>
+        <ui-col width="40"></ui-col>
+      </ui-row>
+    </ui-nav-bar>
+
+    <ui-ex-swiper
+    class="tab-content"
+    style="height: {{ height }}px"
+    boundary-swipe
+    vertical
+    bindchange="handleContentChange($event, 'current')"
+    index="{{ current }}"
+    >
+      <ui-ex-swiper-item boundary-config="{{ boundaryConfig }}">
+        <ui-view class="" style="overflow: scroll;">
+          <ui-ex-swiper pagination="{{ paginationFraction }}"  class="products_img">
+            <ui-ex-swiper-item ui:for="{{ prodcut.productinfo.images }}" ui:for-item="item">
+              <ui-image
+              src="{{ 'http://admin.icsw.cn:8080'+item }}"
+              swiper-mode
+              ></ui-image>
+            </ui-ex-swiper-item>
+          </ui-ex-swiper>
+          <ui-view class="products_text">
+            <ui-view class="title">{{ prodcut.productinfo.product_name }}</ui-view>
+            <ui-view class="small_title">{{ prodcut.productinfo.sketch }}</ui-view>
+            <ui-row>
+              <ui-col vertical-align="middle" align="left">
+                <ui-view class="money">¥ {{ prodcut.productinfo.price }}</ui-view>
+              </ui-col>
+              <ui-col vertical-align="middle" align="right">
+                <ui-view class="time">行程时间：五天四夜
+                  <ui-icon type="prompt" size="15" color="#f33"></ui-icon>
+                </ui-view>
+              </ui-col>
+            </ui-row>
+          </ui-view>
+          <ui-row class="service" height="45">
+            <ui-block ui:for="{{ prodcut.productinfo.productTags }}">
+            
+            <ui-col class="productTags" vertical-align="middle" align="center">
+              <ui-view>
+                <ui-icon type="success" size="15" color="#8243a3"></ui-icon>{{ item }}
+              </ui-view>
+            </ui-col>
+            </ui-block>
+            
+            <ui-col vertical-align="middle" align="right" width="20">
+              <ui-view>
+                <ui-icon type="arrow-right" color="#6D6D6D" size="15"></ui-icon>
+              </ui-view>
+            </ui-col>
+          </ui-row>
+
+  
+          <ui-view class="cut_line">
+            <ui-divider>评论</ui-divider>
+          </ui-view>
+          <ui-view class="small_evaluate">
+            <ui-view class="title">商品评价（39）</ui-view>
+            <ui-row height="30">
+              <ui-col vertical-align="middle" align="center" width="30">
+                <ui-image
+                src="https://static.biyao.com/m/img/base/defult_userimg.png"
+                width="20"
+                height="20"
+                ></ui-image>
+              </ui-col>
+              <ui-col vertical-align="middle" align="left">
+                <ui-view>b***h</ui-view>
+              </ui-col>
+            </ui-row>
+            <ui-text block>产品不错，很合身</ui-text>
+            <ui-view class="all_evaluate">查看全部评论</ui-view>
+          </ui-view>
+          <ui-view class="shop_name">
+            <ui-row height="50">
+              <ui-col vertical-align="middle" align="center" width="60">
+                <ui-image
+                src="https://bfs.biyao.com/group1/M00/03/AE/rBACYVkUkI2APfwPAAC7nzwI-NA595.jpg"
+                width="40"
+                height="40"
+                ></ui-image>
+              </ui-col>
+              <ui-col vertical-align="middle" align="left" border-right>
+                <ui-view>亓口男装</ui-view>
+              </ui-col>
+              <ui-col vertical-align="middle" align="center" width="80">
+                <ui-text block>69</ui-text>
+                <ui-text block>在售商品</ui-text>
+              </ui-col>
+            </ui-row>
+            <ui-scroll-view scroll-x height="200">
+              <ui-view class="other_shop">
+                <ui-view id="a1" class="item" ui:for="{{ otherShop }}" ui:for-item="item">
+                  <ui-image
+                  src="{{ item.src }}"
+                  width="100%"
+                  ></ui-image>
+                  <ui-view class="info">
+                    <ui-text block>{{ item.name }}</ui-text>
+                    <ui-view>{{ item.price }}</ui-view>
+                  </ui-view>
+                </ui-view>
+
+              </ui-view>
+            </ui-scroll-view>
+          </ui-view>
+          <!-- <ui-view class="bottom_tip">↑上拉显示详情页</ui-view> -->
+        </ui-view>
+      </ui-ex-swiper-item>
+      <ui-ex-swiper-item boundary-config="{{ boundaryConfig }}">
+        <ui-view class="">
+          <ui-swiper height="{{ contentHeight }}" class="content"  current="{{ current2 }}" bindchange="handleContentChange1($event, 'current2')">
+            <ui-swiper-item>
+                <ui-view class="details_img">
+                  <ui-view ui:for="{{ detailsImg }}" ui:for-item="item">
+                    <ui-view class="title">{{ item.title }}</ui-view>
+                    <ui-image
+                    src="{{ item.src }}"
+                    width="100%"
+                    ></ui-image>
+                  </ui-view>
+                </ui-view>
+                <ui-view class="details_problem">
+                  <ui-view class="problem_content" ui:for="{{ detailsProblem }}" ui:for-item="item">
+                    <ui-view class="title">{{ item.title }}</ui-view>
+                    <ui-text block ui:for="{{ item.problem }}" ui:for-item="item2">{{ item2 }}</ui-text>
+                  </ui-view>
+                </ui-view>
+                <ui-view class="iphonex-bottom"></ui-view>
+            </ui-swiper-item>
+
+            <ui-swiper-item>
+              <!-- 详情 -->
+                <ui-row-list border-indent bordered class="shop_details">
+                  <ui-row ui:for="{{ details }}" ui:for-item="item">
+                    <ui-col vertical-align="middle" align="left" width="100">
+                      {{ item.name }}
+                    </ui-col>
+                    <ui-col vertical-align="middle" align="left">
+                      {{ item.content }}
+                    </ui-col>
+                  </ui-row>
+                </ui-row-list>
+                <ui-view class="iphonex-bottom"></ui-view>
+            </ui-swiper-item>
+
+            <ui-swiper-item>
+              <!-- 评价 -->
+                <ui-view class="evaluate_wrap">
+                  <ui-view class="title">
+                    <ui-row height="40">
+                      <ui-col vertical-align="middle" align="left" space-left="5">商品满意度</ui-col>
+                      <ui-col vertical-align="middle" align="right" space-right="5">4.9</ui-col>
+                    </ui-row>
+                    <ui-view class="all_shop">
+                      <ui-view>全部商品</ui-view>
+                    </ui-view>
+                  </ui-view>
+                  <ui-view class="evaluate_list" ui:for="{{ evaluate }}" ui:for-item="item">
+                    <ui-row height="40">
+                      <ui-col vertical-align="middle" align="center" width="40">
+                        <ui-image
+                        src="https://static.biyao.com/m/img/base/defult_userimg.png"
+                        width="30"
+                        height="30"
+                        ></ui-image>
+                      </ui-col>
+                      <ui-col vertical-align="middle" align="left">
+                        <ui-view>b***h</ui-view>
+                      </ui-col>
+                      <ui-col width="100" vertical-align="middle" align="right">
+                        <ui-view class="good_evaluate">
+                          <ui-icon type="phiz" size="24" color="#8243a3"></ui-icon>好评
+                        </ui-view>
+                      </ui-col>
+                    </ui-row>
+                    <ui-view class="center">{{ item.text }}</ui-view>
+                    <ui-row height="30" class="bottom">
+                      <ui-col vertical-align="middle" align="left">
+                        {{ item.size }}
+                      </ui-col>
+                      <ui-col vertical-align="middle" align="right">
+                        {{ item.time }}
+                      </ui-col>
+                    </ui-row>
+                  </ui-view>
+
+                </ui-view>
+                <ui-view class="iphonex-bottom"></ui-view>
+            </ui-swiper-item>
+            
+          </ui-swiper>
+
+
+        </ui-view>
+      </ui-ex-swiper-item>
+    </ui-ex-swiper>
+
+
+    <ui-fixed-view bottom="0" class="add_cart">
+      <ui-row height="46">
+        <ui-col vertical-align="middle" align="center" border-right width="80" bindtap="Meiqia">
+          <ui-icon type="comment" size="20" color="#8A8A8A"></ui-icon>
+          客服
+        </ui-col>
+        <ui-col vertical-align="middle" align="center" border-right width="80" class="badge_wrap" bindtap="shoppingCart">
+          <ui-icon type="jd-cart" size="20" color="#8A8A8A"></ui-icon>
+          购物车
+          <ui-badge text="{{ badgeNum }}" ui:if="{{ badgeNum>0 }}"></ui-badge>
+        </ui-col>
+        <ui-col vertical-align="middle" align="center" bindtap="poptuShow">
+          <ui-view class="add">加入购物车</ui-view>
+        </ui-col>
+        <ui-col vertical-align="middle" align="center" bindtap="poptuShow">
+          <ui-view class="buy">立即购买</ui-view>
+        </ui-col>
+      </ui-row>
+      <ui-view class="iphonex-bottom"></ui-view>
+    </ui-fixed-view>
+
+    <ui-popup ui:model="{{ isCart }}" position="bottom" background="transparent"  mask-style="{{{ backgroundColor: 'rgba(0,0,0,0)' }}}"  hide-on-blur="true" class="popup_cart">
+ 
+      <ui-view class="popup_content">
+ 
+
+<ui-calendar
+        value="2018/06/23"
+        disable-past-days="{{false}}"
+      ></ui-calendar>
+        <ui-view class="bottom">
+          <ui-row height="46" border-top>
+            <ui-col vertical-align="middle" align="center">
+              <ui-view class="add" bindtap="joinCart">加入购物车</ui-view>
+            </ui-col>
+            <ui-col vertical-align="middle" align="center" bindtap="joinCart2">
+              <ui-view class="buy">立即购买</ui-view>
+            </ui-col>
+          </ui-row>
+        </ui-view>
+      </ui-view>
+    </ui-popup>
+  </ui-page>
+</template>
+
+<script>
+// import { setTimeout } from 'timers'
+
+export default {
+  config: {
+    "navigationBarTitleText": '商品简介',
+    "disableScroll":true,
+    "navigationStyle": "custom",
+    "navigationBarTextStyle":"black",
+    "delay":true
+  },
+  data () {
+    return {
+      prodcut:{"productinfo":{"product_no":"携程-6974717A-新甄五星/花牛","product_name":"华东五市旅游南京出发上海苏杭州无锡乌镇5日4晚五星跟团游","product_cate":"3","product_cate_name":"国内游","product_tag":"明星产品|全程五星|接送全含|乌镇客栈","principal":"徐美杰","sketch":"【奢享住宿】品牌五星酒店+升级赠送1晚拈花湾·禅意客栈+1晚乌镇客栈\r\n【精选景点】5A中山陵、灵山大佛、西湖、留园，周庄、乌镇·西栅\r\n【特色美食】88-148元中西双早+无锡农家餐+杭州御茶餐+苏州本帮菜\r\n【至尊享受】VIP旅游空调车+成团无忧+行程公开透明+优秀专职导游服务","origin":null,"destination":null,"hotline":"18368113528","notmobile":"0","operate":"","desc":null,"isshow":"0","images":["/upload/images/a61e4efcb5e887f82d6d94d4b385dcf1.jpg","/upload/images/2da0ab2af0b72d5e80258e55bb334cf1.jpg","/upload/images/957856658dc66db2519ab9382240719e.jpg","/upload/images/f4147991a4078c94fd31ea1ec0409046.jpg"],"price":"288-1120","security":"万达专线|成团保障|品质出游|即时确认"},"packagelist":[{"isshow":"0","package_name":"成人","package_no":"1527225616548","notchildren":"1","content":[{"name":"产品详情","html":"<div>温馨提示：</div><div>（1）导游<strong>会提前一天（下午18:00前）</strong>电话联系，确认到达时间及接站详情，请保持手机畅通。</div><p><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i2/2735258587/TB2_0M_tXGWBuNjy0FbXXb4sXXa_!!2735258587.jpg\"></p>"},{"name":"行程描述","html":"<div><div><span style=\"font-weight: bold;\">第1天、全国各地-南京-无锡-住：无锡</span></div><div><div><div>景点:10:00 请您根据航班/车次时间，自行前往六朝古都——南京(游览1小时)</div><p>【我们为您提供免费接机服务】（含：南京禄口机场和南京南站所指定时间内）<br>1、接送站均为旅游当日提供，提前或延住我们不提供此项服务，敬请注意！<br>2、接站时间：我们统一安排导游免费在南京南站接站（7:00-11:30），建议您抵达南京的时间在11:30前！<br>3、接机时间：我们免费安排南京接机时间是上午11点前（不包含11点），下飞机后请及时开机，方便接机师傅与您联系，接机时可能会有等待现象，敬请谅解！如您的航班无法在11:00之前抵达禄口机场，请根据团队行程进度自行前往南京南站或中山陵或夫子庙与团队汇合，费用自理，未游览景点视为自动放弃。</p></div><div><div>景点:12:00 【夫子庙】秦淮河风光带(游览1小时30分钟)</div><p>南京夫子庙即孔庙，建筑群主要由孔庙、学宫、江南贡院荟萃而成，是秦淮风光的精华。夫子庙被誉为古都南京的特色景观区，如今的秦淮河风光带因其众多景点和繁华的商贸购物特色。</p><div><div><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/bao/uploaded/i7/TB1SFT9gURIWKJjSZFgRWPoxXXa_032343.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i1/2735258587/TB25hIzkxOMSKJjSZFlXXXqQFXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i1/2735258587/TB2UWDYX0PJ3eJjSZFLXXab3FXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i1/2735258587/TB25f.NeshmZKJjSZFPXXc5_XXa_!!2735258587.jpg_250x250.jpg\"></a></div></div></div><div><div>景点:14:00 【中山陵园风景区】(游览1小时)</div><p>中山陵前临平川，背拥青嶂，东毗灵谷寺，西邻明孝陵，整个建筑群依山势而建，由南往北沿中轴线逐渐升高，主要建筑有博爱坊、墓道、陵门、石阶、碑亭、祭堂和墓室等，排列在一条中轴线上，体现了中国传统建筑的风格。<br><br>温馨提示：周一中山陵陵门内的景区闭馆，只游览博爱广场、孝经鼎及神道部分，敬请谅解。</p><div><div><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/bao/uploaded/i2/TB10b2vkcnI8KJjSsziTJ28QpXa_013905.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i1/2735258587/TB2Y8m3knnI8KJjSszgXXc8ApXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i2/2735258587/TB2wKOpdGLN8KJjSZFmXXcQ6XXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i1/2735258587/TB2okvnkhHI8KJjy1zbXXaxdpXa_!!2735258587.jpg_250x250.jpg\"></a></div></div></div><div><div>餐饮:早餐自理 午餐自理 晚餐自理</div><p>12:30 午餐敬请自理<br>推荐特色小吃：夫子庙小吃城、南京大排档、尹氏鸡汁汤包、狮子楼、金陵鸭血粉丝汤等。<br><br>17:30 晚餐敬请自理<br>推荐特色小吃：拈花饼记、台湾洪师父牛肉面店、无锡小笼、桥头排骨、台湾小吃、茶禅居、珺客堂、翠香阁、上上签、超级鸡车、一味磨坊、麦森仙草等。<br><br></p></div><div><div>住宿: 无锡灵山小镇拈花湾拈花客栈 豪华(参考酒店)</div><p>拈花湾小镇建有禅意核心会址“禅心谷”、禅意主题商业区“香月花街”、禅意民宿客栈群“鹿鸣谷”、太湖湾生态湿地“悠游渔港”等精品项目，入眠拈花小镇~禅意客栈，静心又静思，体验小镇的禅境，悟出人生淡泊宁静、好好生活之本！<br><br>赠【夜秀~拈花湾】：夜色下的拈花湾，各种美伦美奂的精彩表演与大型灯光秀—『花开五叶音乐喷泉光影秀』、『亮塔仪式』、『五灯湖表演』、『禅行』、『风雅陶笛』等，带您进入一个禅意深长的境界！<br><br>温馨提示<br>1、除拈花湾有重大会议或重大活动；我们均100%保证入住【灵山小镇拈花湾客栈】，体验【禅意拈花湾+夜秀之美】，将为您的江南之旅带来无限震憾！<br>2、如遇景区内法事活动、重大节假日，拈花湾客栈满房，统一升级入住常州或南京五星酒店，敬请谅解！</p><div><div><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/bao/uploaded/i7/TB1S9xPb_qWBKNjSZFxaDIpLpXa_031205.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i4/2735258587/TB2M90HbYZnBKNjSZFrXXaRLFXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i3/2735258587/TB2i.aphf5TBuNjSspmXXaDRVXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i4/2735258587/TB2hetdbZj_B1NjSZFHXXaDWpXa_!!2735258587.jpg_250x250.jpg\"></a></div></div></div></div></div><div><div><span style=\"font-weight: bold;\">第2天、无锡-苏州-乌镇-住：乌镇或桐乡</span></div><div><div><div>景点:07:00 赠【晨游拈花湾】(游览1小时)</div><p>【晨游拈花客栈】：您可早起，感受早晨的拈花世界，“一花一世界”、“芦花宿”、“云半间”、“一池荷叶”、“半窗疏影”，听听鸟儿叫、虫子鸣，花儿香，以及那种特有的宁静安详与无处不在的禅意！<br>温馨提示<br>如行程安排入住南京或常州，则升级五星酒店住宿，取消赠送景点【晨游拈花湾】游览，敬请谅解！</p><div><div><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i2/2735258587/TB2WKAQaBsmBKNjSZFsXXaXSVXa_!!2735258587.jpg_500x500.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i4/2735258587/TB2mW00deuSBuNjSsziXXbq8pXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i4/2735258587/TB2GOBZdb5YBuNjSspoXXbeNFXa_!!2735258587.jpg_250x250.jpg\"></a></div></div></div><div><div>景点:08:30 【灵山大佛】(游览1小时)</div><p>灵山大佛景区俨然已成了古城无锡的旅游新标地，祈福礼佛的好去处，以致世人尊称为“灵山胜境”。其中高达88米的大佛——灵山大佛，更使无数善男信女趋之若鹜。</p><div><div><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/bao/uploaded/i7/TB1aSXpb2iSBuNkSnhJ5qYDcpXa_031252.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i2/2735258587/TB2.8xGbYsrBKNjSZFpXXcXhFXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i3/2735258587/TB2p9euib9YBuNjy0FgXXcxcXXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i4/2735258587/TB2IbClikSWBuNjSszdXXbeSpXa_!!2735258587.jpg_250x250.jpg\"></a></div></div></div><div><div>景点:【九龙灌浴】(游览30分钟)</div><p>在九龙灌浴广场，我们可以看到一座含苞待放的巨大莲花铜雕矗立在前方，荷花由四个威武的大力士托起，底部衬托着白色的圆形大理石水池，九条飞龙和八个形态各异的巨大水池。<br><br>【灵山梵宫】游览30分钟<br>灵山梵宫建筑形式突破传统，景观布局庄严和谐，建筑外形气势恢弘，既体现佛教的博大精深与崇高，又将传统的文化元素与鲜明的时代特征相融合，可以给观者心灵感受和难以忘怀的文化体验。</p><div><div><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/bao/uploaded/i6/TB1mP8JhgaTBuNjSszf8HlgfpXa_031343.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i1/2735258587/TB2Z6rRinJYBeNjy1zeXXahzVXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i4/2735258587/TB2HINGibGYBuNjy0FoXXciBFXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i1/2735258587/TB29Tuhib1YBuNjSszhXXcUsFXa_!!2735258587.jpg_250x250.jpg\"></a></div></div></div><div><div>景点:12:30 集合前往“中国园林之城”—苏州(游览1小时30分钟)</div></div><div><div>景点:14:00 【留园】(游览1小时)</div><p>游中国四大名园之一【留园】，原是明嘉靖年间太仆寺卿徐泰时的东园，清嘉庆年间，刘恕以故园改筑，名寒碧山庄，又称刘园。在一个园林中能领略到山水、田园、山林、庭园四种不同景色，表现淡泊处世之坦然的“小蓬莱”。</p><div><div><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/bao/uploaded/i6/TB1NPYekgfH8KJjy1zcMAZTzpXa_103948.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i2/2735258587/TB2sQdWdRfM8KJjSZFOXXXr5XXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i1/2735258587/TB2J_p2dJHO8KJjSZFtXXchfXXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i2/2735258587/TB2LKc7dpHM8KJjSZJiXXbx3FXa_!!2735258587.jpg_250x250.jpg\"></a></div></div></div><div><div>景点:15:30 集合前往 “中国极美村镇”——乌镇(游览2小时30分钟)</div><p>统一游览【乌镇西栅景区】注：此景区为自由活动，品味江南原生态的枕水人家。【夜游西栅】您可与自己的爱人或亲友选一家河边小店或在当地居民家中，点上几个可口的小菜，品乌镇美食，欣赏着满眼华丽的灯光水色。</p><div><div><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/bao/uploaded/i2/TB19qCtkdzJ8KJjSspkYzHF7VXa_104233.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i3/2735258587/TB2r4g_cQfb_uJkSnb4XXXCrXXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i1/2735258587/TB2BH31cPgy_uJjSZKPXXaGlFXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i1/2735258587/TB25xXkc7fb_uJkSnfoXXb_epXa_!!2735258587.jpg_250x250.jpg\"></a></div></div></div><div><div>餐饮:早餐含 午餐含 晚餐自理</div><p>08:00 酒店内享用中西自助早餐<br><br>11:30 午餐 太湖农家特色餐<br>参考菜单：清蒸白鱼、太湖白虾、银鱼炒蛋、三鲜面筋、灵山野山菜、无锡酱排骨、湖蚌豆腐煲、金 牌猪脚、杭椒炒牛肉、土鸡煲【整鸡】、剁椒鱼头、小炒肉、碧玉时蔬、时令汤（参考菜单，随季节变化而微调）<br><br>17:30 晚餐敬请自理<br>方便游览，西栅景区内自由用餐<br>特色小吃推荐：三珍斋酱品、红烧羊肉、熏豆茶、三白酒、姑嫂饼、白水鱼、定胜糕……</p></div><div><div>住宿: 乌镇客栈或桐乡酒店 豪华(参考酒店)</div><p>除乌镇重大会议或节假日外，我们均100%保证入住西栅景区内特色客栈，通安客栈、水巷驿、水市客舍、昭明书舍其中1家，360°体验枕水江南水乡古镇之休闲惬意！<br>如节假日或重大会议乌镇西栅客栈满房，统一安排入住桐乡—振石大酒店、黄金水岸大酒店或梵璞文化主题酒店等或同级，敬请知晓！<br><br>重要提示：2018年6月28日、29日、30日当晚入住乌镇西栅的团期，因景区内有重大会议，我们将安排您入住西栅外酒店，敬请谅解！</p></div></div></div><div><div><span style=\"font-weight: bold;\">第3天、乌镇-西塘-南浔-杭州-住：杭州</span></div><div><div><div>景点:08:30 集合乘车前往梦里的江南水乡——【西塘】(游览1小时30分钟)</div></div><div><div>景点:10:00 【西塘】(游览2小时)</div><p>西塘古镇位于江浙沪三省交界处的浙江省嘉善县，是一座有千年历史文化的江南古镇。西塘素以“桥多、弄多、廊棚多”而闻名。值得一提的是，这里也是许多电影电视剧的取景之地。在船泊岸边，至今还留着阿汤哥的《谍中谍3》取景地的标识牌。</p><div><div><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/bao/uploaded/i8/TB1ohAcfruWBuNjSszgxVn8jVXa_041231.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i1/2735258587/TB2.cgRfx9YBuNjy0FfXXXIsVXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i2/2735258587/TB2Raj7fuuSBuNjSsplXXbe8pXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i3/2735258587/TB2E4BpfUR1BeNjy0FmXXb0wVXa_!!2735258587.jpg_250x250.jpg\"></a></div></div></div><div><div>景点:14:00 【南浔古镇】(游览1小时)</div><p>南浔，一个风光旖旎的江南古镇，地处浙江省北面的湖州市东部，750年的风风雨雨将它洗练成一处人杰地灵、物华天宝的魅力之地。这座仅2平方公里的水乡古镇值得你花上几天功夫好好探索：这里有太多南浔“四象”巨富或是他们后代的大宅，值得你进去好好参观，研究一下华丽丽的洛可可风格怎样在质朴无华的徽派建筑上熠熠生辉；站在高处张望运河两岸密布着的鳞次栉比的、如出一辙得分不出彼此的百间楼。</p><div><div><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i2/2735258587/TB2un0.kKuSBuNjy1XcXXcYjFXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i1/2735258587/TB2WBiskN9YBuNjy0FfXXXIsVXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i4/2735258587/TB2Q7VGkGSWBuNjSsrbXXa0mVXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i1/2735258587/TB24u0OkL9TBuNjy1zbXXXpepXa_!!2735258587.jpg_250x250.jpg\"></a></div></div></div><div><div>景点:17:00 自费项目(游览2小时30分钟)</div><p>【宋城以及宋城千古情演出】：收费标准320元/人<br>给我一天，还你千年，到了夜晚，景区内的仿古建筑在各色灯光映耀下很美，颇有水乡古镇姿色。 游客可根据自身情况选择参加，绝无强迫！</p><div><div><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i2/2735258587/TB2VAY1fCCWBuNjy0FhXXb6EVXa_!!2735258587.jpg_500x500.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i2/2735258587/TB2po5mbC8YBeNkSnb4XXaevFXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i4/2735258587/TB2O3oafuSSBuNjy0FlXXbBpVXa_!!2735258587.jpg_250x250.jpg\"></a></div></div></div><div><div>餐饮:早餐含 午餐含 晚餐自理</div><p>07:30 早餐 酒店内享用中西自助餐<br><br>12:00 午餐 享用景区内特色水乡宴<br><br>17:30 晚餐 晚餐敬请自理</p></div><div><div>住宿: 杭州海外海皇冠大酒店 豪华(参考酒店)</div><p>参考酒店：杭州钱江万怡大酒店、杭州龙禧福朋喜来登酒店、杭州holiday inn等或同级，如遇节假日、旺季满房等情况，不保证一定入住以上酒店，将安排不低于原档次的其它酒店，敬请知晓！</p></div></div></div><div><div><span style=\"font-weight: bold;\">第4天、杭州-上海-住：上海</span></div><div><div><div>景点:08:30 【西湖+赠送船游西湖】(游览1小时)</div><p>苏轼的《饮湖上初晴雨后》曾写道：欲把西湖比西子，淡妆浓抹总相宜。随着一首诗词，将西湖喻为美女西施，已成千古定论，而经历了几千年的岁月蹉跎，西湖，依旧如一个婉约的江南女子，带着一抹淡然的微笑伫立在杭州这座古城。2011年6月24日，杭州西湖正式列入《世界遗产名录》。</p><div><div><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/bao/uploaded/i6/TB1q15ofTtYBeNjy1XdA5lXyVXa_032820.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i2/2735258587/TB2KxFbfUR1BeNjy0FmXXb0wVXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i3/2735258587/TB2pBP4fv9TBuNjy0FcXXbeiFXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i4/2735258587/TB2_JrMfrSYBuNjSspiXXXNzpXa_!!2735258587.jpg_250x250.jpg\"></a></div></div></div><div><div>景点:【苏堤】(游览30分钟)</div><p>苏堤春晓俗称苏公堤，是一条贯穿西湖南北风景区的林荫大堤，乃西湖十景之首。苏堤由南而北有映波桥、锁澜桥、望山桥、压堤桥、东浦桥和跨虹桥，望山桥南面的御碑亭里立有康熙题写的“苏堤春晓”碑刻。</p></div><div><div>景点:13:00 统一集合前往“东方巴黎”——上海(游览2小时)</div></div><div><div>景点:16:00 【中华艺术宫】(游览1小时)</div><p>中华艺术宫坐落于上海市区黄浦江南岸，曾是2010年上海世博会被称为“东方之冠”的中国国家馆。在这里，既能慢悠悠地参观这座雄伟的建筑，又能观赏到中国馆的镇馆之宝——多媒体版《清明上河图》，还能看到绘画、摄影、书法、连环画、雕塑等中国近代艺术家作品，其中不少展品是从原来的上海美术馆迁来的。<br><br>温馨提示：此景点为赠送景点，观光了解被称为“东方之冠”的上海世博会的中国国家馆。 周一闭馆，敬请谅解。</p><div><div><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i1/2735258587/TB26tAWcOCYBuNkHFCcXXcHtVXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i2/2735258587/TB2KPxAkFGWBuNjy0FbXXb4sXXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i3/2735258587/TB2nrqnkGmWBuNjy1XaXXXCbXXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i2/2735258587/TB2avpykL9TBuNjy0FcXXbeiFXa_!!2735258587.jpg_250x250.jpg\"></a></div></div></div><div><div>景点:18:00 自费项目(游览2小时)</div><p>【《海、陆、空》摩登夜上海】：收费标准280元/人<br>套餐包含：登金茂大厦、黄浦江游船、门票及车导接送，当地现付即可。 <br>三种方式不同视角领略大上海迷人璀璨的夜景，初来上海的您值得拥有！ <br>①“海”—乘坐高档游船悠哉欣赏黄浦江两岸迷人夜色 <br>② “陆”—漫步外滩，近距离赏万国建筑博览群 <br>③“空” —登金茂大厦88层观光层或者东方明珠观光层俯瞰大上海全市夜景 <br>Tips：该景点为自费项目，遵循客人自愿自费的原则选择参加，不强制消费！</p><div><div><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i4/2735258587/TB2aK7UaAUmBKNjSZFOXXab2XXa_!!2735258587.jpg_500x500.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i4/2735258587/TB2wXRQdf5TBuNjSspcXXbnGFXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i4/2735258587/TB23dQaaqQoBKNjSZJnXXaw9VXa_!!2735258587.jpg_250x250.jpg\"></a></div></div></div><div><div>餐饮:早餐含 午餐含 晚餐自理</div><p>08:00 早餐 酒店内享用中西自助早餐<br><br>11:30 午餐 品尝特色茶树宴<br>参考餐单如下：钱江葱油鳊鱼、龙井茶香烤虾、西湖酱鸭、千百叶包肉、豉油水泼蛋、宫爆鸡丁、手撕包菜、酸辣土豆丝、杭式东坡肉、黑椒牛仔粒、咸肉冬瓜汤 。（以上菜单仅参考，有可能会因季节变化而微调）。<br><br>17:00 晚餐 晚餐敬请自理<br></p></div><div><div>住宿: 上海宏泉丽笙、复旦皇冠假日等或同级五星豪华 豪华(参考酒店)</div><p>参考酒店：上海万丽酒店、上海温德姆酒店、上海宝龙丽君或同级酒店，如遇节假日、旺季满房等情况，不保证一定入住以上酒店，将安排不低于原档次的其它酒店，敬请知晓！</p></div></div></div><div><div><span style=\"font-weight: bold;\">第5天、上海-全国各地</span></div><div><div><div>景点:09:00 【上海城隍庙】(游览1小时)</div><p>上海城隍庙是上海著名的旅游景点，作为道教宫观，可谓历史悠久，在国内外享有盛名，随着经济的发展，已经成为上海小旅游圈，城隍庙道观、城隍庙小吃、豫园等。<br><br>温馨提示：如您早班机来不及游览城隍庙景区，无费用可退，敬请谅解！</p><div><div><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i1/2735258587/TB29iZLaAomBKNjSZFqXXXtqVXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i4/2735258587/TB215seazQnBKNjSZSgXXXHGXXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i1/2735258587/TB2vvtydgmTBuNjy1XbXXaMrVXa_!!2735258587.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i3/2735258587/TB2wvTpdmBYBeNjy0FeXXbnmFXa_!!2735258587.jpg_250x250.jpg\"></a></div></div></div><div><div>景点:10:00 【南京路步行街】(游览1小时)</div><p>南京路步行街长约1200米，两侧商店林立，一眼望去，现代建筑夹杂着欧式老楼，竖挂的店铺灯箱连绵不绝，尤其夜幕之下霓虹灯光闪烁，别有风情。你还可以坐一回像缩小版旧式电车的“铛铛车”，找找老上海的味道。<br><br>温馨提示：如您早班机来不及游览南京路步行街景区，无费用可退，敬请谅解！</p><div><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/bao/uploaded/i1/TB1MwItfuOSBuNjy0FdJ_TDnVXa_035409.jpg_250x250.jpg\"></a><a href=\"javascript:;\"><img src=\"https://img.alicdn.com/imgextra/i4/2735258587/TB2qDQAfASWBuNjSszdXXbeSpXa_!!2735258587.jpg_250x250.jpg\"></a></div></div><div><div>景点:11:30 上海散团(游览2小时)</div><p>免费送站/送机（只含：虹桥机场/火车站）<br>1、约11点结束上海行程，（11:00-12:00）根据客人回程时间统一安排送站！<br>2、我们免费班车送站只含上海虹桥机场和上海虹桥火车站，其他站点不含，请自行前往！<br>3、返程建议选择15:00之后的虹桥航班/火车车次。如您的航班/车次时间较早或较晚，请您自行前往机场或火车站，行程来不及游览的费用不退！</p></div><div><div>餐饮:早餐含 午餐自理 晚餐自理</div><p>07:00 早餐 酒店内享用中西自助餐<br>11:00 午餐 午餐敬请自理</p></div></div></div><div><div><span style=\"font-weight: bold;\">END</span><div><div><span style=\"font-weight: bold;\">行程结束，飞猪祝您旅途愉快</span></div><div><span style=\"font-weight: bold;\">* 本行程仅供参考，实际以卖家出团确认为准</span></div></div></div></div>"},{"name":"套餐说明","html":"<div><div><span style=\"font-weight: bold;\">费用包含</span></div><div>【成人价格包含】 <br>1.交通：正规旅游空调大巴车<br>2.住宿：行程中所列酒店或同级，双人标准间；单男单女我社尽量安排拼住或三人间，如无法协调需补交单房差<br>（免费升级赠送1晚拈花湾小镇客栈、1晚乌镇客栈；客栈房少紧张且不能安排加床，无法保证视情况安排） <br>3.门票：行程所列景点首道大门票<br>4.餐食：4早3正餐，自助早餐，团队特色正餐(自身原因放弃用餐，费用不退)； <br>5.导游：优秀导游服务，确保接待质量； <br>儿童价格包含 <br>1.身高1.2-1.4米：当地旅游车费、导游服务费、半价正餐； <br>2.参考道路交通法则，0.8米以上（含0.8米）1.2米以下儿童规定占座，需补车位费200元<br>3.1.4米以上（含1.4米）参考成人套餐报名<br>【接送站服务】 <br>南京接站：南京南站、机场免费 （上午11:00）<br>上海送站：虹桥机场、虹桥火车站免费 （中午12:00）<br>统一时段接送，其它时间、站点均不含接送</div></div><div><div><br></div><div><span style=\"font-weight: bold;\">费用不含</span></div><div>1.仅含当地旅游大巴，不含往返的大交通（如飞机、火车）； <br>2.行程中景点内的小门票、小交通（如索道、观光车、游船等）； <br>3.不含人身意外伤害险； <br>4.儿童价不含景区门票、自费项目，产生现付； 不占床，不含早餐； <br>5.行程中推荐自费项目和费用包含以外其他费用均不含。 <br>项目一：【宋城及宋城千古情夜秀】 <br>项目二：【《海、陆、空》摩登夜上海套餐】</div></div><div><div><br></div><div><span style=\"font-weight: bold;\">自费项目</span></div><div>1.夜景【宋城及宋城千古情演出】：费用自理320元/人<br>给我一天，还你千年，到了夜晚，景区内的仿古建筑在各色灯光映耀下很美，颇有水乡古镇姿色。 以上项目，游客可根据自身情况选择参加，绝无强迫！<br>2.推荐项目【《海、陆、空》摩登夜上海】：收费标准280元/人<br>套餐包含：登金茂大厦、黄浦江游船、门票及车导接送，当地现付即可。 <br>三种方式不同视角领略大上海迷人璀璨的夜景，初来上海的您值得拥有！ <br>①“海”—乘坐高档游船悠哉欣赏黄浦江两岸迷人夜色 <br>②“陆”—漫步外滩，近距离赏万国建筑博览群 <br>③“空” —登金茂大厦88层观光层或者东方明珠观光层俯瞰大上海全市夜景 <br>Tips：该景点为自费项目，遵循客人自愿自费的原则选择参加，不强制消费！</div></div><div><div><br></div><div><span style=\"font-weight: bold;\">预定须知</span></div><div>①有效信息：请在预订时务必提供准确、完整的信息（姓名、证件号码、国籍、联系方式、是否成人或儿童等），参团时须携带有效期内的身份证件（无身份证儿童需带户口本原件），如因提供错误信息或没带有效证件而造成损失自行承担。含迪士尼、高铁票线路一经预定即为出票，具体车次、车程等以实际为准。 <br>②参团年龄：70岁以上老人需须与我社签订《免责声明》，确保身体健康适宜旅游并由20周岁以上家属全程陪同方可参团，本团不接受80岁以上老人和孕妇预订，谢谢配合！18周岁以下未成年人须有家长或成年旅客陪同。 <br>③安全防范：旅行社导游和其他工作人员无法为游客提供一对一的服务，旅游活动中游客须注意自身安全和随行未成年人的安全，保管好个人财务，贵重物品随身携带，如有丢失或遗落游客自行承担责任。 <br>④以上行程有可能根据天气、交通等情况，进行适当调整，以确保行程顺利进行；因不可抗力等因素造成无法游览，无法按原行程执行而造成的费用变更，我社实行多退少补，敬请配合。 未产生的门票及房费、餐费均按团队价退还； 景点游览、自由活动、购物店停留的时间以当天实际游览为准。本产品如因淡季或收客人数较少，有可能与相近方向的发班线路拼车出游，届时请游客见谅。赠送项目因航班、天气等不可抗因素导致不能赠送的，费用不退。 <br>⑤请仔细阅读行程，选择合适的旅游线路，因自身原因，行程景点未参加或提前结束，费用不退还。行程游览中不允许擅自离团（自由活动除外），中途离团视同游客违约，按照合同总金额20%赔付旅行社，由此造成未参加行程内景点、用餐、房、车等费用不退，旅行社亦不承担游客离团期间的任何责任。 <br>⑥本产品门票为团队优惠联票，持老年证、军官证、学生证等优惠证件的人群均不再享受门票优惠。出现免票的情况，由导游在离团前现场按实际旅行社团队价退还费用。</div></div>"},{"name":"退改规则","html":"<div id=\"J_RefundTerms\"><div>退改规则</div><div><p>【买家违约】订单生效后，因买家原因取消订单的，费用扣除标准如下：</p><table><tbody><tr><td>行程开始前</td><td>违约金（占订单总费用）</td></tr><tr><td>7日以上</td><td>0%</td></tr><tr><td>1—6日</td><td>30%</td></tr><tr><td>行程开始当日</td><td>50%</td></tr></tbody></table><p>【商家违约】订单生效后，因商家原因取消订单的，除全额退款外，商家还应向买家支付下表对应金额的违约金：</p><table><tbody><tr><td>行程开始前</td><td>违约金（占订单总费用）</td></tr><tr><td>7日以上</td><td>5%</td></tr><tr><td>1—6日</td><td>5%</td></tr><tr><td>行程开始当日</td><td>20%</td></tr></tbody></table><p>针对飞猪专线或出境超市的商品，如商家按上述规定向买家支付的违约金金额低于订单金额的，商家应向买家支付与订单金额同等金额的违约金。</p><p>注：订单生效的规定以《飞猪规则》的相关规定为准。</p></div></div><div><div>保险说明</div><div>该商品不赠送保险，飞猪建议您自行购买出行保险，为您的旅行增加一份保障，家人添一份安心。</div></div>"}]}],"groupdate":[{"date":"2018-05-26","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-05-26","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-05-27","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-05-27","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-05-28","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-05-28","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-05-29","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-05-29","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-05-30","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-05-30","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-05-31","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-05-31","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-01","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-01","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-02","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-02","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-03","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-03","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-04","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-04","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-05","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-05","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-06","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-06","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-07","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-07","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-08","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-08","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-09","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-09","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-10","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-10","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-11","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-11","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-12","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-12","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-13","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-13","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-14","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-14","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-15","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-15","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-16","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-16","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-17","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-17","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-18","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-18","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-19","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-19","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-20","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-20","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-21","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-21","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-22","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-22","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-23","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-23","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-24","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-24","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-25","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-25","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-26","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-26","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-27","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-27","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-28","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-28","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-29","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-29","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-06-30","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-06-30","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-01","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-01","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-02","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-02","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-03","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-03","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-04","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-04","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-05","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-05","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-06","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-06","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-07","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-07","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-08","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-08","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-09","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-09","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-10","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-10","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-11","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-11","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-12","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-12","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-13","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-13","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-14","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-14","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-15","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-15","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-16","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-16","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-17","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-17","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-18","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-18","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-19","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-19","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-20","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-20","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-21","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-21","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-22","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-22","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-23","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-23","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-24","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-24","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-25","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-25","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-26","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-26","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-27","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-27","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-28","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-28","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-29","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-29","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-30","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-30","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-07-31","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-07-31","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-01","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-01","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-02","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-02","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-03","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-03","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-04","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-04","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-05","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-05","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-06","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-06","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-07","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-07","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-08","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-08","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-09","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-09","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-10","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-10","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-11","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-11","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-12","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-12","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-13","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-13","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-14","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-14","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-15","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-15","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-16","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-16","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-17","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-17","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-18","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-18","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-19","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-19","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-20","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-20","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-21","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-21","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-22","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-22","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-23","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-23","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-24","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-24","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-25","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-25","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-26","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-26","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-27","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-27","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-28","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-28","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-29","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-29","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-30","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-30","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]},{"date":"2018-08-31","list":[{"isshow":"0","product_id":"89","package_no":"1527225616548","teamtime":"2018-08-31","package_name":"成人","adult_price":"1299.00","housing_price":"900","children_price":"488.00","lay_TABLE_INDEX":0}]}],"tripInfo":null},
+      current: 0,
+      isloading:true,
+      current2: 0,
+      number: 1,
+      prodcut: {},
+      tabStyle:{
+        'flex':'0 0 40px'
+      },
+      swiper1: true,
+      swiper2: false,
+      contentHeight: ui.DEFAULT_CONTENT_HEIGHT,
+      width:ui.WIN_WIDTH,
+      height: ui.DEFAULT_CONTENT_HEIGHT - 46,
+      shopName: '加厚提花丝光羊毛针织衫 4205',
+      minImg: 'https://bfs.biyao.com/group1/M00/21/CD/rBACYVoDsu2AJ0x4AAFzfz0X8Zc330_400x400.jpg',
+      paginationFraction: {
+        type: 'fraction'
+      },
+      images: [
+        'https://bfs.biyao.com/group1/M00/21/CF/rBACYVoDtoGAS2G4AAF64K74WkI826.jpg',
+        'https://bfs.biyao.com/group1/M00/20/1A/rBACVFoDtoWAX3PhAAFzfz0X8Zc868.jpg'
+      ],
+      otherShop: [
+        {
+          src: 'https://bfs.biyao.com/group1/M00/1F/C7/rBACVFoBTzyAX7ZEAACY21C5fXI268.jpg',
+          name: '经典纯色长袖T恤（2件装）',
+          price: '￥219'
+        }, {
+          src: 'https://bfs.biyao.com/group1/M00/21/7D/rBACYVoBS2eAGLERAACGBt2GJLE867.jpg',
+          name: '经典纯色圆领T恤（2件装）',
+          price: '￥199'
+        }, {
+          src: 'https://bfs.biyao.com/group1/M00/22/A3/rBACVFomgq-ANmslAACcqsAhIvk817.jpg',
+          name: '针织羊毛时尚连帽大衣',
+          price: '￥699'
+        }, {
+          src: 'https://bfs.biyao.com/group1/M00/24/16/rBACYVohJFWAag_cAACdB8zSZ4w703.jpg',
+          name: '时尚卷边丝光羊毛针织衫',
+          price: '￥359'
+        }, {
+          src: 'https://bfs.biyao.com/group1/M00/24/06/rBACYVogAWaAUMDBAACW25z6rd4054.jpg',
+          name: '时尚印花长袖圆领卫衣',
+          price: '￥249'
+        }, {
+          src: 'https://bfs.biyao.com/group1/M00/24/0E/rBACW1oguKKATWw1AACZ_zOy2rQ695.jpg',
+          name: '羊毛天丝口袋翻领针织衫',
+          price: '￥299'
+        }, {
+          src: 'https://bfs.biyao.com/group1/M00/22/F1/rBACYVoOpLiAWl5dAACaEPjUntg416.jpg',
+          name: '加厚条纹肌理羊毛针织衫',
+          price: '￥359'
+        }, {
+          src: 'https://bfs.biyao.com/group1/M00/24/1C/rBACW1oheIeAM6lVAACef7Zvcww291.jpg',
+          name: '带扣小翻领丝光羊毛针织衫',
+          price: '￥369'
+        }, {
+          src: 'https://bfs.biyao.com/group1/M00/20/E6/rBACVFoLoZ6AR9rCAACeI1pnTTE939.jpg',
+          name: '定位提花丝光羊毛针织衫',
+          price: '￥359'
+        }, {
+          src: 'https://bfs.biyao.com/group1/M00/22/9C/rBACW1oLny6AOUQrAACeZCJkVEE062.jpg',
+          name: '小提花保暖长袖针织外套',
+          price: '￥499'
+        }
+      ],
+      details: [
+        {
+          name: '商品名称',
+          content: '加厚提花丝光羊毛针织衫 4205'
+        }, {
+          name: '品牌名称',
+          content: '亓口'
+        }, {
+          name: '面料成分',
+          content: '48.1%羊毛30.9%锦纶21%腈纶'
+        }, {
+          name: '主要卖点1',
+          content: '选用光泽度极佳的丝光羊毛混纺纱线，细腻柔软，毛绒饱满，前片以特殊肌理提花，营造出定位条纹效果'
+        }, {
+          name: '主要卖点2',
+          content: '领口与袖口打破常规织法，加以提花点缀，更精致时尚，整体款式简约大方，内搭外穿皆宜，尽显大牌档次感'
+        }, {
+          name: '主要卖点3',
+          content: '精选澳大利亚美利奴丝光羊毛，既保留了羊毛的手感温暖、丰厚的特性，又减少了羊毛对皮肤的刺激感'
+        }, {
+          name: '主要卖点4',
+          content: '手感更柔滑细腻，蓬松保暖，与锦纶、腈纶混纺，既改善了面料的耐磨性，减少起毛起球，又提高了保暖性'
+        }, {
+          name: '洗涤说明',
+          content: '1、羊毛/羊绒织物，建议送至专业干洗护理店清洗。'
+        }, {
+          name: '————',
+          content: '2、如需手洗，请用羊毛专用洗涤剂洗涤，需轻揉，不可用力搓，浸泡时间不要超过5分钟，请用清水漂清。'
+        }, {
+          name: '————',
+          content: '3、需轻轻挤干，不可用力。按针织本来形状整理平铺阴干，不可阳光下暴晒，必要时可以用蒸汽熨斗整烫。'
+        }, {
+          name: '————',
+          content: '4、严禁高温水洗（水温不能超过30℃），请勿洗衣机搅洗、甩干，否则容易缩水变形，切记'
+        }, {
+          name: '特别提示',
+          content: '含羊毛/羊绒的衣服，轻微起球属于正常现象，请避开与硬物的摩擦'
+        }, {
+          name: '温馨提示',
+          content: '由于灯光和显示器偏差等现象，可能导致实物与照片产生色差，请以最终收到实物商品颜色为准'
+        }, {
+          name: '产地',
+          content: '厦门'
+        }, {
+          name: '发票须知',
+          content: '国家税务总局规定，自2017年7月1日起，开票抬头为公司者需提供“购买方纳税人识别号”否则无法做报销凭证。'
+        }, {
+          name: '---------',
+          content: '本公司开具电子发票，请您在购买后选择开具电子发票并按要求填写（注：如没填写完整将无法开具发票）'
+        }
+      ],
+      detailsImg: [
+        {
+          title: '整体款式简约大方，内搭外穿皆宜',
+          src: 'https://bfs.biyao.com/group1/M00/20/1A/rBACVFoDtv2AZE8fAAMTN7A-DCs819.jpg'
+        }, {
+          title: '前片以特殊肌理提花，定位条纹效果',
+          src: 'https://bfs.biyao.com/group1/M00/21/CF/rBACYVoDtwGAUJpiAAL1XIUAU_c732.jpg'
+        }, {
+          title: '立体有型、别致耐看',
+          src: 'https://bfs.biyao.com/group1/M00/20/1A/rBACVFoDtwiAV6LYAAMCf4Jf0xA293.jpg'
+        }, {
+          title: '选用光泽度极佳的丝光羊毛混纺纱线',
+          src: 'https://bfs.biyao.com/group1/M00/21/CF/rBACYVoDtwuASfsGAAMMG4_2cRM913.jpg'
+        }, {
+          title: '细腻柔软，毛绒饱满',
+          src: 'https://bfs.biyao.com/group1/M00/20/1A/rBACVFoDtvCAW8iiAALfbZ0rDQ4714.jpg'
+        }, {
+          title: '抗起毛起球，又提高了保暖性',
+          src: 'https://bfs.biyao.com/group1/M00/21/D0/rBACW1oDtuqADT8oAAMGdSGxq_o719.jpg'
+        }, {
+          title: '手感更柔滑细腻，蓬松保暖',
+          src: 'https://bfs.biyao.com/group1/M00/21/D0/rBACW1oDtuiAWoanAAMWjt7gBQA646.jpg'
+        }, {
+          title: '精选澳大利亚美利奴丝光羊毛',
+          src: 'https://bfs.biyao.com/group1/M00/21/D0/rBACYVoDt-mAZ35VAAMDs9i84tQ686.jpg'
+        }, {
+          title: '做工考究，线迹细腻',
+          src: 'https://bfs.biyao.com/group1/M00/20/34/rBACVFoEBf2AWC3bAALbOsZ2LGw075.jpg'
+        }, {
+          title: '合体剪裁，美观大方',
+          src: 'https://bfs.biyao.com/group1/M00/20/33/rBACVFoEBHuAPvFMAAL9wf0kgjY039.jpg'
+        }, {
+          title: '测量方法',
+          src: 'https://bfs.biyao.com/group1/M00/20/1A/rBACVFoDtyWAW_-hAAJ60ragI00520.jpg'
+        }, {
+          title: '尺码建议表',
+          src: 'https://bfs.biyao.com/group1/M00/22/19/rBACW1oFSlWAbl6nAAMAew8Y4vo679.jpg'
+        }
+      ],
+      detailsProblem: [
+        {
+          title: '常见问题',
+          problem: [
+            '关于色差：亓口男装所有产品均为专业摄影团队实物拍摄，并精心调整色差的结果，尽量与实物商品一致，但由于灯光和显示器偏差等现象，可能导致实物与照片产生色差，请以最终收到实物商品颜色为准。',
+            '关于免烫：成衣经过特殊的免烫处理，与普通衣衫对比，较不易褶皱，但非完全不褶皱。“免烫”是指在洗涤过后只需轻微熨烫或无需熨烫即可恢复到平整的状态。',
+            '关于抗皱：面料经过液氨后整理，与普通整理面料相比，正确洗涤后无明显大的褶皱，晾晒时可将起皱部位稍加抻拽即可。',
+            '亓口男装衬衫均为合体版，由于每个人穿着风格不同，喜欢宽松的建议购买时选择偏大一个码。'
+          ]
+        }, {
+          title: '购买须知',
+          problem: [
+            '1.商品选择搭配时，3D模拟系统会将商品效果进行展示，不同显示设备会存在一定色差，最终请以实物为准。',
+            '2.商品均为标准尺码并配有相对应的尺码对照表供您参考；产品均为手工测量，存在细微的误差，请以收到实物为准。',
+            '3.商品均非现货，需要一定生产周期，具体请您查阅购买页面的“生产周期”提示。',
+            '4.商家开始确认生产，将根据您订单需求进行制作生产；故无法做任何修改及取消订单。'
+          ]
+        }, {
+          title: '发货快递',
+          problem: [
+            '寄出商品可享受顺丰快递包邮服务'
+          ]
+        }, {
+          title: '发票说明',
+          problem: [
+            '1：如需要发票，下单时请勾选电子发票，并填写准确的发票抬头（公司名称）、纳税人识别号或统一社会信用代码，以及电子邮箱。',
+            '2：根据“国家税务总局2017年第16号的公告”从2017年7月1日起开具“公司名称”为抬头的发票，必须提供“纳税人识别号或统一社会信用代码”，如未提供或提供信息不完整，则无法为其开具发票。',
+            '3：发票抬头为“个人”的仅需要提供电子邮箱即可。',
+            '4：订单交易成功后15个工作日内，我们将为您开具电子发票，并以PDF文件的形式发送至您的邮箱。',
+            '5：电子发票与传统纸质发票具备同等效力，下载打印即可报销。',
+            '6：已开具电子发票的客户无法再为其开具发票。',
+            '注：如需要发票下单时请务必备注电子邮箱，我们将在收到申请后15天内开具电子发票发送至您的电子邮箱。如不备注电子邮箱，我们将无法开具发票，谢谢！'
+          ]
+        }, {
+          title: '售后说明',
+          problem: [
+            '1.自签收之日起7日内，您可在“我的订单”中申请退货退款；款项将原支付路径退还。',
+            '2.个性化定制商品（如签名、特殊材质、个性颜色搭配等）：非质量问题无法办理退换货。',
+            '3.办理退货时，请您务必确保商品原质原貌，包装吊牌完整、未经使用。',
+            '4.由于本公司开具电子发票，如需发票请您在购买后备注留言您的电子邮箱、开票抬头、纳税人识别号。',
+            '5.如已开具发票，需将发票与商品一同寄回；如发票丢失或未寄回则无法为您办理退货退款。',
+            '6.商家原因（如发错货，商品质量问题等），您可以直接申请退货退款，选择顺丰上门取件，进行免费退货；不支持顺丰取件区域，可由顾客先行垫付，退货完毕后，必要平台将根据退货运单及费用凭证为您报销。',
+            '7.亓口品牌商品，严格执行“国家服装类三包规定”。'
+          ]
+        }
+      ],
+      evaluate: [
+        {
+          text: '产品不错，很合身',
+          size: '颜色：黑色；尺寸：M',
+          time: '2017-12-5'
+        },
+        {
+          text: '很好',
+          size: '颜色：藏青；尺寸：XL',
+          time: '2017-12-5'
+        }, {
+          text: '产品不错，很合身',
+          size: '颜色：黑色；尺寸：M',
+          time: '2017-12-5'
+        },
+        {
+          text: '很好',
+          size: '颜色：藏青；尺寸：XL',
+          time: '2017-12-5'
+        }, {
+          text: '产品不错，很合身',
+          size: '颜色：黑色；尺寸：M',
+          time: '2017-12-5'
+        },
+        {
+          text: '很好',
+          size: '颜色：藏青；尺寸：XL',
+          time: '2017-12-5'
+        }, {
+          text: '产品不错，很合身',
+          size: '颜色：黑色；尺寸：M',
+          time: '2017-12-5'
+        },
+        {
+          text: '很好',
+          size: '颜色：藏青；尺寸：XL',
+          time: '2017-12-5'
+        }, {
+          text: '产品不错，很合身',
+          size: '颜色：黑色；尺寸：M',
+          time: '2017-12-5'
+        },
+        {
+          text: '很好',
+          size: '颜色：藏青；尺寸：XL',
+          time: '2017-12-5'
+        }, {
+          text: '产品不错，很合身',
+          size: '颜色：黑色；尺寸：M',
+          time: '2017-12-5'
+        },
+        {
+          text: '很好',
+          size: '颜色：藏青；尺寸：XL',
+          time: '2017-12-5'
+        }
+      ],
+      boundaryConfig: {
+        topTip: {
+          beginText: '↓下拉查看商品简介',
+          activeText: '↑释放查看商品简介'
+        },
+        bottomTip: {
+          beginText: '↑上拉查商品详情',
+          activeText: '↓释放查看商品详情'
+        }
+      },
+
+      size: 'S',
+      colors: [
+        {
+          text: '黑色',
+          tagClass: 'color1',
+          tagSelectedClass: 'select-class',
+          checked: true
+        },
+        {
+          text: '红色',
+          tagClass: 'color1',
+          tagSelectedClass: 'select-class',
+          checked: false
+        },
+        {
+          text: '蓝色',
+          tagClass: 'color1',
+          tagSelectedClass: 'select-class',
+          checked: false
+        }
+      ],
+      sizes: [
+        {
+          text: 'S',
+          tagClass: 'color1',
+          tagSelectedClass: 'select-class',
+          checked: true
+        }, {
+          text: 'M',
+          tagClass: 'color1',
+          tagSelectedClass: 'select-class',
+          checked: false
+        }, {
+          text: 'L',
+          tagClass: 'color1',
+          tagSelectedClass: 'select-class',
+          checked: false
+        }, {
+          text: 'XL',
+          tagClass: 'color1',
+          tagSelectedClass: 'select-class',
+          checked: false
+        }, {
+          text: 'XXL',
+          tagClass: 'color1',
+          tagSelectedClass: 'select-class',
+          checked: false
+        }
+      ],
+      isCart: false,
+      colorText:'黑色',
+      badgeNum:0,
+       //控制日历翻页属性
+        datePage: '2018/04',
+        //控制日历当前选中日期
+        date: '',
+        //临时存储日期
+        dateobj: {},
+        // 年
+        dateyear: null,
+        // 月
+        datemonth: null,
+        // 日
+        dateday: null,
+        // 日历可选之间范围
+        monthrange: [],
+        contentHeight: ui.DEFAULT_CONTENT_HEIGHT
+    }
+  },
+  methods: {
+    handleContentChange (index, key) {
+      console.log(index, key)
+      if (index === 1) {
+        this.swiper2 = true
+        this.swiper1 = false
+      } else if (index === 0) {
+        this.swiper1 = true
+        this.swiper2 = false
+      }
+      this[key] = index
+    },
+    handleContentChange1 (index, key) {
+        this[key] = index
+    },
+    // 回退处理
+    handleBack () {
+      ui.navigateBack()
+    },
+    handleChange (index, key) {
+      console.log('11',index,key)
+      this[key] = index
+    },
+
+    backTop () {
+      this.current = 0
+    },
+    //购物车
+    shoppingCart(){
+      ui.navigateTo({
+        url: '/pages/product/shoppingCart'
+      })
+    },
+    singleTap (opt) {
+      // ui.showToast({
+      //   title: this.colors[opt].text
+      // })
+      this.colorText = this.colors[opt].text
+      this.colors.forEach((item, index) => {
+        item.checked = (index === opt)
+      })
+    },
+    singleTap2 (opt) {
+      this.size = this.sizes[opt].text
+      this.sizes.forEach((item, index) => {
+        item.checked = (index === opt)
+      })
+    },
+    subtraction (val) {
+      this.number = val
+    },
+    addition (val) {
+      this.number = val
+    },
+    poptuShow () {
+      this.isCart = true
+      ui.removeStorageSync('v3_ui_shopList')
+    },
+    popupHide () {
+      this.isCart = false
+    },
+    joinCart(){
+      this.isCart = false
+      
+      let v3_ui_shopList = ui.getStorageSync('v3_ui_shopList')
+      if (v3_ui_shopList === null) {
+        v3_ui_shopList = []
+      }
+      if (this.number > 0) {
+        let content = {
+          height: 80,
+          img:this.minImg,
+          title:'TIMEABLE Jeans 服饰',
+          serialNumber:this.number,
+          price:100,
+          checked:false
+        }
+        v3_ui_shopList.push(content)
+        this.badgeNum = content.serialNumber
+        ui.setStorageSync('v3_ui_shopList', v3_ui_shopList)
+      }
+    },
+    joinCart2(){
+      this.isCart = false
+      setTimeout(() => {
+        ui.navigateTo({
+          url: '/pages/product/payment'
+        })
+      }, 500);
+    },
+     // 客服
+    Meiqia () {
+      ui.startMeiqia({
+        info: {
+          name: '张三',
+          tel: '123456',
+          weixin: '5201314',
+          '爱好': '吃苹果'
+        },
+        message: '你好',
+        success: function (data) {
+        },
+        fail: function (data) {
+        }
+      })
+    },
+     // 选择日期
+      selectedHandler (e) {
+        this.init(e)
+      },
+      // 滑动时变化
+      monthChangeHandler (e) {
+        this.changeDate(e)
+      },
+      //手动切换下一个月
+      nextchange () {
+        // 结束时间范围的时间戳
+        let endrange = Date.parse(new Date(this.monthrange[1]))
+        let arr = this.monthrange[1].split('/')
+        endrange = new Date(arr[0],arr[1]-1)
+        let date = new Date(this.dateobj.arr[0],this.dateobj.arr[1]-1)
+        date.setMonth(date.getMonth() + 1)
+        // 改变后的日期时间戳
+        
+        //判断切换后下一个月的时间是否超出给定的时间范围
+        if (date > endrange) {
+          return false
+        } else {
+          this.dateobj.date = this.format(date)
+          this.changeDate(this.dateobj.date)
+          this.datePage = this.dateobj.arr[0]+'/'+this.dateobj.arr[1]
+        }
+        
+      },
+      // 手动切换上一个月
+      prevchange () {
+        // 开始时间范围的时间戳
+        let startrange = Date.parse(new Date(this.monthrange[0]))
+        // let startrange
+        let arr = this.monthrange[0].split('/')
+        startrange = new Date(arr[0],arr[1]-1)
+        let date = new Date(this.dateobj.arr[0],this.dateobj.arr[1]-1)
+        date.setMonth(date.getMonth() - 1)
+        //判断切换后上一个月的时间是否超出给定的时间范围
+        if (date < startrange) {
+          return false
+        } else {
+          this.dateobj.date = this.format(date)
+          this.changeDate(this.dateobj.date)
+          this.datePage = this.dateobj.arr[0]+'/'+this.dateobj.arr[1]
+        }
+      },
+      // 签到
+      qiandao () {
+        let arr = this.date.split('/')
+        let year = arr[0]
+        let month = arr[1]
+        let day = arr[2]
+        ui.showToast({ title: `签到：${year} 年 ${month} 月 ${day} 日` })
+      },
+      // 将日期格式化成 "年/月/日" 格式
+      format (obj) {
+        var date = new Date(obj)
+        var y = 1900 + date.getYear()
+        var m = '0' + (date.getMonth() + 1)
+        var d = '0' + date.getDate()
+        return y + '/' + m.substring(m.length - 2, m.length) + '/' + d.substring(d.length - 2, d.length)
+      },
+      // 初始化、以及点击切换日期时调用。改变日历组件value值。给年月日分别赋值
+      init (date) {
+        this.dateobj.date = date
+        this.dateobj.arr = date.split('/')
+        this.date = this.dateobj.date
+        this.dateyear = this.dateobj.arr[0]
+        this.datemonth = this.dateobj.arr[1]
+        this.dateday = this.dateobj.arr[2]
+      },
+      //滑动时改变日期，不改变日历组件的value值。给年月日分别赋值
+      changeDate(date){
+        this.dateobj.date = date
+        this.dateobj.arr = date.split('/')
+        this.dateyear = this.dateobj.arr[0]
+        this.datemonth = this.dateobj.arr[1]
+        this.dateday = this.dateobj.arr[2]
+      }
+  },
+  mounted () {
+
+   //计算日期范围。控制手动点击上个月／下个月 时在在时间范围内切换 
+      let start, end
+      let rangedate = new Date()
+      let rangedate2 = new Date()
+      start = this.format(rangedate.setMonth(new Date().getMonth() - 6))
+      end = this.format(rangedate2.setMonth(new Date().getMonth() + 6))
+      start = start.substring(0, 7)
+      end = end.substring(0, 7)
+      this.monthrange.push(start, end)
+      // 获取今天日期，并格式化日期格式
+      let date = new Date()
+      this.init(this.format(date))
+      console.log(this.format(date))
+
+
+    let v3_ui_shopList = ui.getStorageSync('v3_ui_shopList')
+    if(v3_ui_shopList !== null){
+      this.badgeNum=v3_ui_shopList[0].serialNumber
+    }
+    var that = this;
+    ui.request({
+      url: '/api/product/item?product_id='+ui.getQuery().id, //仅为示例，并非真实的接口地址
+      success: function (res) {
+        console.log(res.data)
+        that.prodcut = res.data.data
+        that.isloading = false
+      }
+    })
+
+    
+  }
+}
+
+</script>
+
+<style lang="less">
+.ui-nav-bar{
+  .mix-1px(0, 0, 1, 0, #ccc);
+}
+// .swiper-slide {
+//   overflow: scroll;
+// }
+.tab-content {
+  flex: 1;
+  color: #999;
+  .swiper-slide {
+    // padding:1em;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+// 1
+.products_img{
+  img{
+    width: 100%;
+  }
+}
+.swiper-pagination-fraction {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  left: auto;
+  right: 1em;
+  bottom:1em;
+  .swiper-pagination-total {
+    font-size: 12px;
+  }
+}
+.products_text{
+  padding: 10px;
+  background-color: #fff;
+  .title{
+    font-size: 18px;
+    color: #333;
+    line-height: 40px;
+  }
+  .small_title{
+    font-size: 12px;
+    color: gray;
+    padding-bottom: 20px;
+  }
+  .ui-row{
+    .money{
+      font-size: 18px;
+      color: #f33;
+    }
+    .time{
+      font-size: 12px;
+      color: gray;
+    }
+  }
+}
+.service{
+  background-color: #f8f8f8;
+  font-size: 12px;
+  color: gray;
+}
+.choice{
+  background-color: #fff;
+  margin-top: 10px;
+  .ui-view{
+    color: #333;
+  }
+}
+.cut_line{
+  width: 150px;
+  margin: 0 auto;
+  font-size: 12px;
+  padding: 5px 0;
+}
+.small_evaluate{
+  background-color: #fff;
+  padding: 10px;
+  .ui-view{
+    font-size: 12px;
+    color: #333;
+    line-height: 25px;
+  }
+  .title{
+    font-size: 14px;
+    line-height: 40px;
+  }
+  .all_evaluate{
+    color: #39f;
+    font-size: 12px;
+    border-radius: 25px;
+    border: 1px solid #39f;
+    width: 100px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 25px;
+    margin-top: 20px;
+  }
+}
+.shop_name{
+  padding: 10px 0;
+  margin-top: 10px;
+  background-color: #fff;
+  .ui-row{
+    .ui-view{
+      color: #000;
+    }
+    .ui-text{
+      color: #333;
+    }
+  }
+  .other_shop{
+    background-color: #FFFFFF;
+    width:1100px;
+    padding-top: 20px;
+    .mix-clearfix();
+    .item{
+      width: 110px;
+      // height: 200px;
+      padding: 0 5px;
+      float: left;
+      color: #333;
+      text-align: center;
+      .info{
+        padding: 10px 0;
+        text-align: center;
+        .ui-text{
+          .mix-text-overflow();
+          color: #000;
+        }
+        .ui-view{
+          color: #f33;
+          font-size: 12px;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+.add_cart{
+  width: 100%;
+  z-index: 300;
+  background-color: #fff;
+  border-top: 1px solid #eee;
+  .ui-row{
+    .ui-col{
+      color: #727272;
+      font-size: 12px;
+      .ui-icon{
+        line-height: 25px;
+      }
+      .ui-view{
+        width: 100%;
+        text-align: center;
+        font-size: 14px;
+        line-height: 46px;
+        &.add{
+          color: #39f;
+        }
+        &.buy{
+          color: #fff;
+          background-color: #39f;
+        }
+      }
+    }
+  }
+  .badge_wrap{
+    position: relative;
+    .ui-badge{
+      position: absolute;
+      top: 5px;
+      right: 8px;
+    }
+  }
+}
+
+// 2
+.tabs_wrap{
+  display: inline-block;
+}
+/* .ui-tabs {
+  height:44px;
+
+  &.type-common {
+
+
+    .ui-icon {
+      margin: 0 5px;
+      font-size: 16px;
+    }
+
+    .item-list{
+      line-height: 46px;
+      margin:0 10px;
+      font-size:14px;
+      position:relative;
+    }
+
+    // .tab-line{
+    //   width:100%;
+    //   height:2px;
+    //   background-color:#39f;
+    //   position:absolute;
+    //   bottom:5px;
+    //   display:none;
+    //   width:-webkit-fill-available;
+    // }
+    // .active .tab-line{
+    //   display: block
+    // }
+  }
+} */
+
+.ui-tabs-ink-bar-inner{
+  width:50px;
+}
+.bottom_tip{
+  text-align: center;
+  line-height: 40px;
+  font-size: 12px;
+  color: #999;
+}
+
+//详情
+.shop_details{
+  line-height: 30px;
+  color: #333;
+}
+.details_img{
+  background-color: #fff;
+  padding: 10px;
+  color: #333;
+  .title{
+    text-align: center;
+    line-height: 40px;
+    font-size: 14px;
+  }
+}
+.details_problem{
+  padding: 10px;
+  margin-bottom: 20px;
+  .problem_content{
+    padding: 10px;
+    background-color: #fff;
+    .title{
+      border: 1px solid #eee;
+      line-height: 30px;
+      text-align: center;
+      font-size: 14px;
+    }
+    .ui-text{
+      color: #666;
+      font-size: 12px;
+      line-height: 20px;
+      margin: 10px 0;
+    }
+  }
+}
+.evaluate_wrap{
+  .title{
+    background-color: #fff;
+    .ui-row{
+      border: 1px solid #eee;
+    }
+    .all_shop{
+      padding: 5px 10px;
+      .ui-view{
+        width: 70px;
+        border: 1px solid #39f;
+        color: #39f;
+        font-size: 12px;
+        border-radius: 25px;
+        line-height: 25px;
+        text-align: center
+      }
+    }
+  }
+  .evaluate_list{
+    margin-top: 10px;
+    background-color: #fff;
+    padding: 10px;
+    .good_evaluate{
+      color: #39f;
+      font-size: 12px;
+      .mix-flex-y-center();
+      .ui-icon{
+        margin-right: 5px;
+      }
+    }
+    .center{
+      font-size: 14px;
+      color: #333;
+      line-height: 30px;
+    }
+    .bottom{
+      color: #979797;
+      font-size: 12px;
+    }
+  }
+
+}
+
+
+
+
+.swiper-slide-tip{
+  padding-top:20px;
+  font-size:10px;
+  color:#ccc;
+}
+.swiper-slide-top-tip{
+  padding:0;
+}
+.swiper-wrapper .swiper-slide:first-child{
+  .swiper-slide-top-tip{
+    display:none;
+  }
+}
+.swiper-wrapper .swiper-slide:last-child{
+
+  .swiper-slide-tip{
+    display:none;
+  }
+  .swiper-slide-top-tip{
+    display:block;
+  }
+} 
+
+
+
+.popup_cart{
+  .popup_content{
+    background: #fff;
+    height:1250rpx;
+    padding:0 10px;
+    position: relative;
+  }
+  .top_null{
+    height: 20px;
+  }
+  .top{
+    .head{
+      margin-top: -25px;
+    }
+    .price{
+      color: #f33;
+      font-size: 14px;
+    }
+    .ui-text{
+      color: gray;
+      font-size: 12px;
+      // line-height: 30px;
+    }
+    .select{
+      font-size: 12px;
+      color: #333;
+    }
+  }
+  .color{
+    .ui-text{
+      line-height:30px;
+    }
+  }
+  .size{
+    margin-top:5px;
+    border-bottom:1px solid #c7c7c7;
+    padding-bottom: 10px;
+    .ui-text{
+      line-height:30px;
+    }
+  }
+  .bottom{
+    position: absolute;
+    bottom:0;
+    left: 0;
+    width: 100%;
+    .ui-view{
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      line-height: 46px;
+      &.add{
+        color: #39f;
+      }
+      &.buy{
+        color: #fff;
+        background-color: #39f;
+      }
+    }
+  }
+  .ui-tags{
+    .ui-tag-item{
+      margin-right: 10px;
+    }
+    .color1{
+      // .mix-1px(1, 1, 1, 1, gray);
+      border:1px solid gray;
+      border-radius: 5px;
+      color: gray;
+      padding: 0px 10px;
+    }
+    .select-class{
+      // .mix-1px(1, 1, 1, 1, #ccc);
+      border:1px solid #39f;
+      background-color: #39f;
+      border-radius: 5px;
+      color: #fff;
+      padding: 0px 10px;
+    }
+  }
+}
+.productTags{
+  padding: 15rpx 25rpx;
+}
+ .win{
+    background-color: #f4f2f3
+  }
+  .personalbox{
+    background-color: #39f;
+    .headimgbox{
+      width:50px;
+      height:50px;
+      border-radius: 50%;
+      margin:0 auto;
+      border:1px solid #ccc;
+      overflow: hidden;
+      .ui-image{
+        width:100%;
+      }
+    }
+    .infobox{
+      color:#fff;
+      padding:20px 0;
+      .num{
+        font-size:16px;
+      }
+      .text{
+        font-size:14px;
+      }
+    }
+  
+  }
+  
+  .calendartab{
+    width:200px;
+    margin:0 auto;
+    text-align: center;
+    line-height: 50px;
+    background-color: #fff
+  }
+  .calendartab{
+    margin-top:20px;
+  }
+  
+  .calendar-head{
+    background-color:#fff !important
+  }
+  .calendar-week-head{
+    color:#333;
+  }
+</style>

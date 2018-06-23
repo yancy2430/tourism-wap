@@ -143,6 +143,7 @@ export default {
     },
     showFullScreenSearch () {
       ui.getApp().globalData.searchShow = true
+      ui.getApp().globalData.searchIsMain = true
       ui.setStatusBarStyle({ style: 'dark' })
     },
 

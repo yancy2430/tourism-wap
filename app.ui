@@ -19,7 +19,12 @@ export default {
       "pages/userCenter/userCenter",
       "pages/userCenter/userInfo",
       "pages/userCenter/problemFeedback",
-
+   
+      "pages/product/sort",
+      "pages/product/list",
+      "pages/product/detail",
+      "pages/product/shoppingCart",
+      "pages/product/payment",
 
     ],
     "theme": {
@@ -54,13 +59,14 @@ export default {
         }
       ]
     },
-    "networkBaseUrl":""
+    "networkBaseUrl":"http://localhost:8080"
   },
   data () {
     return {
         //全局变量
       globalData: {
         searchShow: false,
+        searchIsMain: false,
         shareMask:false,
         href: 'http://www.uileader.com/touchui_jdfinance/#/pages/share/greenHand/greenHand',
         audioShow:false
@@ -144,7 +150,24 @@ export default {
       type: 'link',
       icon: 'http://images.uileader.com/20180116/96d4b45d-4765-41fd-bc29-85919ddb4057.png',
       title: '高仿京东金融',
-      content: '官方推出的TOUCH UI应用案例'
+      content: '官方推出的TOUCH UI应用案例',
+        //控制日历翻页属性
+        datePage: '',
+        //控制日历当前选中日期
+        date: '',
+        //临时存储日期
+        dateobj: {},
+        // 年
+        dateyear: null,
+        // 月
+        datemonth: null,
+        // 日
+        dateday: null,
+        // 日历可选之间范围
+        monthrange: [],
+        contentHeight: ui.DEFAULT_CONTENT_HEIGHT
+
+        
     }
   },
   computed: {
@@ -291,15 +314,6 @@ export default {
       }
       return {}
     },
-getTabBar () {
-      let tabBars = [this.$router.options.tabBar, ...this.$router.options.pageTabBars]
-      for (let i = 0; i < tabBars.length; i++) {
-        if (tabBars[i].paths && tabBars[i].paths.indexOf(this.$route.path) > -1) {
-          return tabBars[i]
-        }
-      }
-      return {}
-    },
     // 关闭popicon图标导航
     hidepopicon (e) {
       if (this.canClick) {
@@ -340,28 +354,38 @@ getTabBar () {
       if (value !== '') {
         this.historyContent.unshift(value)
         this.hideFullScreenSearch()
-        ui.showToast({ title: value })
+        this.toProductList (value) 
       }
       this.searchValue = ''
     },
     // 点击热门搜索
     hotTap (opt) {
+      console.log(opt)
       this.hideFullScreenSearch()
-      ui.showToast({
-        title: this.hotList[opt].text
-      })
+
+
+      this.toProductList (this.hotList[opt.index].text) 
     },
     // 点击搜索历史
     historyTap (index) {
       this.hideFullScreenSearch()
-      ui.showToast({
-        title: this.historyContent[index]
-      })
+      this.toProductList (this.historyContent[index]) 
     },
     handleNavIconTap () {
       this.showSlideMenu = !this.showSlideMenu
     },
-
+    toProductList (key) {
+      if(this.globalData.searchIsMain){
+        ui.navigateTo({
+          url:"/pages/product/list?key="+key
+        })
+      }else{
+        ui.redirectTo({
+          url:"/pages/product/list?key="+key
+        })
+      }
+        
+    },
     // 关闭侧滑菜单
     closeMenu (val) {
       this.showSlideMenu = false
@@ -548,11 +572,7 @@ getTabBar () {
               <ui-col vertical-align="middle">大家都在搜</ui-col>
             </ui-row>
             <ui-view class="history_content">
-              <ui-tags
-              data="{{ hotList }}"
-              bindchange="hotTap"
-              selected-class="select-class"
-              ></ui-tags>
+              <ui-tags data="{{ hotList }}" bindchange="hotTap" selected-class="select-class" ></ui-tags>
             </ui-view>
           </ui-view>
         </ui-view>
