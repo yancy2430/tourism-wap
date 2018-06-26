@@ -1,23 +1,194 @@
 <!--完善订单-->
 <template>
-  <ui-page>
+  <ui-page class="page">
+      <ui-view class="content_header">
+        <ui-view class="title">当天可定 运动曲靖市珠江源风景区门票成人电子屏珠江源门票</ui-view>
+        <ui-view class="package_type">套餐类型：  套餐类型</ui-view>
+        <ui-view class="trip_date">出行日期：  2018-06-28</ui-view>
+      </ui-view>
+      <ui-view class="content_prompt">
+        <ui-view class="title">
+          <ui-icon mode="wechat" type="info-circle" size="18"></ui-icon>
+          次商品需二次确认</ui-view>
+        <ui-view class="desc">付款后卖家将在6个工作小时内（工作日9：00-18：00）核实是否有位，若核实无位或超时未确认，自动退款</ui-view>
+      </ui-view>
 
+      <ui-view class="content_num">
+        <ui-view class="title">购买数量</ui-view>
+        <ui-view class="buynum">
+
+          <ui-view class="item">成人￥200
+            <ui-stepper style="float: right"></ui-stepper>
+          </ui-view>
+          <ui-view class="item">儿童￥100
+            <ui-stepper style="float: right"></ui-stepper>
+          </ui-view>
+          <ui-view class="item">单房差￥50
+            <ui-stepper style="float: right"></ui-stepper>
+          </ui-view>
+        </ui-view>
+      </ui-view>
+
+      <ui-view class="content_cxr">
+        <ui-row-list>
+          <ui-row height="35">
+            <ui-col space-left="10" wdith="100" align="left" vertical-align="middle">
+              我要付款后填写出行人
+            </ui-col>
+            <ui-col width="75" align="right" vertical-align="middle">
+              <ui-switch ui:model="{{ cxr }}" ></ui-switch>
+            </ui-col>
+          </ui-row>
+        </ui-row-list>
+      </ui-view>
+    <ui-view class="content_cxr" ui:if="{{ !cxr }}">
+      <ui-view class="title">出行人</ui-view>
+      <ui-row-list>
+        <ui-row height="36">
+          <ui-input style="border: none;width: 30%;" placeholder="姓名"></ui-input>
+          <ui-input style="border: none;" placeholder="身份证"></ui-input>
+        </ui-row>
+        <ui-row height="36">
+          <ui-input style="border: none;width: 30%;" placeholder="姓名"></ui-input>
+          <ui-input style="border: none;" placeholder="身份证"></ui-input>
+        </ui-row>
+      </ui-row-list>
+    </ui-view>
+    <ui-view class="content_cxr">
+      <ui-view class="title">联系人</ui-view>
+      <ui-row-list>
+        <ui-row height="36">
+            <ui-text style="width: 20%;line-height: 36px">姓名</ui-text>
+            <ui-input style="border: none;" placeholder="请输入联系人姓名"></ui-input>
+        </ui-row>
+        <ui-row height="36">
+          <ui-text style="width: 20%;line-height: 36px">手机号</ui-text>
+          <ui-input style="border: none;" placeholder="请输入联系手机号"></ui-input>
+        </ui-row>
+      </ui-row-list>
+    </ui-view>
+    <ui-view class="content_cxr" style="margin-bottom: 56px">
+      <ui-view class="title">买家留言</ui-view>
+      <ui-view>
+        <ui-textarea placeholder="随便写点什么" rows="1" auto-height></ui-textarea>
+      </ui-view>
+    </ui-view>
+    <ui-view class="bottom">
+      <ui-row height="46" border-top>
+        <ui-col vertical-align="middle" align="center">
+          <ui-view class="add" bindtap="joinCart">
+            <ui-text style="float: left;margin-left: 10px;color: red;font-size: 18px">￥188</ui-text>
+            <ui-text style="float: right;margin-right: 10px">明细</ui-text>
+          </ui-view>
+        </ui-col>
+        <ui-col vertical-align="middle" align="center" bindtap="joinCart2">
+          <ui-view class="buy">去付款</ui-view>
+        </ui-col>
+      </ui-row>
+    </ui-view>
   </ui-page>
 </template>
 
-<script>
-export default {
-  config: {
-    navigationBarTitleText: "完善订单"
-  },
-  data() {
-    return {}
-  },
-  methods: {},
-  mounted() {}
-}
-</script>
-
 <style lang="less">
+  .page{
+    background: #f6f6f6;
+  }
+  .content_cxr{
+    .title {
+      font-weight: 700;
+      font-size: 15px;
+      padding-bottom: 5px;
+    }
+    border-radius: 5px;
+    background: #fff;
+    margin:10px;
+    padding: 10px;
+  }
+  .content_num{
+    .title {
+      font-weight: 700;
+      font-size: 15px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #dddddd;
+    }
+    .buynum{
+      .item{
+        height: 30px;line-height: 30px;font-size: 15px;
+        margin: 10px 0;
+      }
+    }
+    border-radius: 5px;
+    background: #fff;
+    margin:10px;
+    padding: 10px;
+  }
+  .content_prompt{
+    border-radius: 5px;
+    background: #fff;
+    margin:10px;
+    padding: 10px;
+    .desc{
+      margin-top: 5px;
+      font-size: 13px;
+      line-height: 20px;
+      color: #666666;
+    }
 
+  }
+    .content_header{
+      border-radius: 5px;
+      background: #fff;
+      margin:10px;
+      padding: 10px;
+      .title{
+        font-weight: 700;
+        font-size: 15px;
+      }
+      .package_type{
+        font-size: 13px;
+        line-height: 20px;
+        color: #666666;
+      }
+      .trip_date{
+        font-size: 13px;
+        line-height: 20px;
+        color: #666666;
+      }
+    }
+  .bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    .ui-view {
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      line-height: 46px;
+      &.add {
+        color: #39f;
+      }
+      &.buy {
+        color: #fff;
+        background-color: #39f;
+      }
+    }
+  }
 </style>
+
+<script>
+    export default {
+        config: {
+            navigationBarTitleText: "完善订单"
+        },
+        data() {
+            return {
+                cxr:false
+
+            }
+        },
+        methods: {},
+        mounted() {}
+    }
+</script>
