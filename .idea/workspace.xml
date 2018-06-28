@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="05b25004-c9b9-42c0-a6ca-7a26c8ff6bb9" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/product/detail.ui" beforeDir="false" afterPath="$PROJECT_DIR$/pages/product/detail.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/product/perfect.ui" beforeDir="false" afterPath="$PROJECT_DIR$/pages/product/perfect.ui" afterDir="false" />
-    </list>
+    <list default="true" id="05b25004-c9b9-42c0-a6ca-7a26c8ff6bb9" name="Default" comment="" />
     <ignored path="touchui.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,8 +32,8 @@
       <file leaf-file-name="detail.ui" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/product/detail.ui">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="572" column="23" lean-forward="true" selection-start-line="572" selection-start-column="23" selection-end-line="572" selection-end-column="23" />
+            <state relative-caret-position="2927">
+              <caret line="572" column="23" selection-start-line="572" selection-start-column="23" selection-end-line="572" selection-end-column="23" />
               <folding>
                 <element signature="n#style#0;n#ui-ex-swiper#0;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
               </folding>
@@ -48,13 +44,12 @@
       <file leaf-file-name="perfect.ui" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/product/perfect.ui">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-413">
-              <caret line="50" column="28" lean-forward="true" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
+            <state relative-caret-position="1050">
+              <caret line="50" column="28" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
               <folding>
                 <element signature="n#style#0;n#ui-stepper#0;n#ui-view#0;n#ui-view#1;n#ui-view#2;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#ui-stepper#0;n#ui-view#1;n#ui-view#1;n#ui-view#2;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#ui-stepper#0;n#ui-view#2;n#ui-view#1;n#ui-view#2;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ui-input#0;n#ui-row#0;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#ui-input#0;n#ui-row#0;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#ui-input#0;n#ui-row#1;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#ui-input#1;n#ui-row#1;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
@@ -66,7 +61,6 @@
                 <element signature="n#style#0;n#ui-text#0;n#ui-view#0;n#ui-col#0;n#ui-row#0;n#ui-view#7;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#ui-text#1;n#ui-view#0;n#ui-col#0;n#ui-row#0;n#ui-view#7;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#!!top" />
-                <element signature="e#647#657#0" />
               </folding>
             </state>
           </provider>
@@ -150,6 +144,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -177,7 +172,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -211,11 +205,12 @@
       <workItem from="1529505261682" duration="29000" />
       <workItem from="1529834487186" duration="5895000" />
       <workItem from="1529899555310" duration="5278000" />
+      <workItem from="1530020119604" duration="58000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11202000" />
+    <option name="totallyTimeSpent" value="11260000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="312" y="23" width="1147" height="809" extended-state="0" />
@@ -223,16 +218,16 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="right" id="Remote Host" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16561086" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1683258" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -263,6 +258,45 @@
     <entry file="file://$PROJECT_DIR$/app.ui">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/pages/product/perfect.ui">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1050">
+          <caret line="50" column="28" lean-forward="true" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
+          <folding>
+            <element signature="n#style#0;n#ui-stepper#0;n#ui-view#0;n#ui-view#1;n#ui-view#2;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-stepper#0;n#ui-view#1;n#ui-view#1;n#ui-view#2;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-stepper#0;n#ui-view#2;n#ui-view#1;n#ui-view#2;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-input#0;n#ui-row#0;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-input#0;n#ui-row#1;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-input#1;n#ui-row#1;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-text#0;n#ui-row#0;n#ui-row-list#0;n#ui-view#5;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-input#0;n#ui-row#0;n#ui-row-list#0;n#ui-view#5;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-text#0;n#ui-row#1;n#ui-row-list#0;n#ui-view#5;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-input#0;n#ui-row#1;n#ui-row-list#0;n#ui-view#5;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-view#6;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-text#0;n#ui-view#0;n#ui-col#0;n#ui-row#0;n#ui-view#7;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-text#1;n#ui-view#0;n#ui-col#0;n#ui-row#0;n#ui-view#7;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/product/detail.ui">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12012">
+          <caret line="572" column="23" lean-forward="true" selection-start-line="572" selection-start-column="23" selection-end-line="572" selection-end-column="23" />
+          <folding>
+            <element signature="n#style#0;n#ui-ex-swiper#0;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.ui">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/pages/product/detail.ui">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23667">
@@ -287,13 +321,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/product/perfect.ui">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-413">
-          <caret line="50" column="28" lean-forward="true" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
+        <state relative-caret-position="1050">
+          <caret line="50" column="28" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
           <folding>
             <element signature="n#style#0;n#ui-stepper#0;n#ui-view#0;n#ui-view#1;n#ui-view#2;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#ui-stepper#0;n#ui-view#1;n#ui-view#1;n#ui-view#2;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#ui-stepper#0;n#ui-view#2;n#ui-view#1;n#ui-view#2;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-input#0;n#ui-row#0;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#ui-input#0;n#ui-row#0;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#ui-input#0;n#ui-row#1;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#ui-input#1;n#ui-row#1;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
@@ -305,15 +338,14 @@
             <element signature="n#style#0;n#ui-text#0;n#ui-view#0;n#ui-col#0;n#ui-row#0;n#ui-view#7;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#ui-text#1;n#ui-view#0;n#ui-col#0;n#ui-row#0;n#ui-view#7;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#!!top" />
-            <element signature="e#647#657#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/product/detail.ui">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="572" column="23" lean-forward="true" selection-start-line="572" selection-start-column="23" selection-end-line="572" selection-end-column="23" />
+        <state relative-caret-position="2927">
+          <caret line="572" column="23" selection-start-line="572" selection-start-column="23" selection-end-line="572" selection-end-column="23" />
           <folding>
             <element signature="n#style#0;n#ui-ex-swiper#0;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
           </folding>
