@@ -25,7 +25,8 @@ export default {
       "pages/product/detail",
       "pages/product/shoppingCart",
       "pages/product/payment",
-      "pages/product/perfect"
+      "pages/product/perfect",
+      "pages/review/review"
     ],
     theme: {
       "theme-color": "#39f"

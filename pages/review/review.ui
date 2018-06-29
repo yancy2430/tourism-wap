@@ -50,7 +50,7 @@
         </ui-view>
         <ui-view class="sample_title">
             7、您的宝贵意见
-            <ui-text class="right">{{starResult7}}</ui-text>
+            <ui-text class="right"></ui-text>
         </ui-view>
         <ui-view class="">
             <ui-view class="sample_content">
@@ -87,7 +87,7 @@
                 isLoading: false,
                 isDisable: false,
                 starResult1: "",
-                result1: "",
+                result1: 0,
                 starResult2: "",
                 result2: "",
                 starResult3: "",
@@ -208,15 +208,30 @@
                         name: that.name,
                         phone: that.phone
                     },
-                    method:"POST",
                     header: {
                         'content-type': 'application/json'
                     },
                     success: function (res) {
                         console.log(res.data)
+                        ui.showToast({ title: '提交成功', icon: 'success' })
                         that.isLoading = false
                         that.buttonText = '提交'
                         that.isDisable = false
+                        that.starResult1= ""
+                        that.result1= 0
+                        that.starResult2= ""
+                        that.result2= ""
+                        that.starResult3= ""
+                        that.result3= ""
+                        that.starResult4= ""
+                        that.result4= ""
+                        that.starResult5= ""
+                        that.result5= ""
+                        that.starResult6= ""
+                        that.result6= ""
+                        that.content= ""
+                        that.name = ""
+                        that.phone= ""
                     }
                 })
 
