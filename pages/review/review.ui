@@ -1,0 +1,254 @@
+<!--点评-->
+<template>
+    <ui-page>
+
+        <ui-view class="sample_title">
+            1、行程安排是否满意
+            <ui-text class="right">{{starResult1}}</ui-text>
+        </ui-view>
+
+        <ui-view class="star-demo">
+            <ui-star bindchange="handleStar1"></ui-star>
+        </ui-view>
+        <ui-view class="sample_title">
+            2、住宿是否满意
+            <ui-text class="right">{{starResult2}}</ui-text>
+        </ui-view>
+        <ui-view class="star-demo">
+            <ui-star bindchange="handleStar2"></ui-star>
+        </ui-view>
+
+        <ui-view class="sample_title">
+            3、用车是否满意
+            <ui-text class="right">{{starResult3}}</ui-text>
+        </ui-view>
+        <ui-view class="star-demo">
+            <ui-star bindchange="handleStar3"></ui-star>
+        </ui-view>
+
+        <ui-view class="sample_title">
+            4、用餐是否满意
+            <ui-text class="right">{{starResult4}}</ui-text>
+        </ui-view>
+        <ui-view class="star-demo">
+            <ui-star bindchange="handleStar4"></ui-star>
+        </ui-view>
+
+        <ui-view class="sample_title">
+            5、司机是否满意
+            <ui-text class="right">{{starResult5}}</ui-text>
+        </ui-view>
+        <ui-view class="star-demo">
+            <ui-star bindchange="handleStar5"></ui-star>
+        </ui-view>
+        <ui-view class="sample_title">
+            6、导游是否满意
+            <ui-text class="right">{{starResult6}}</ui-text>
+        </ui-view>
+        <ui-view class="star-demo">
+            <ui-star bindchange="handleStar6"></ui-star>
+        </ui-view>
+        <ui-view class="sample_title">
+            7、您的宝贵意见
+            <ui-text class="right">{{starResult7}}</ui-text>
+        </ui-view>
+        <ui-view class="">
+            <ui-view class="sample_content">
+                <ui-textarea ui:model="{{ content }}" placeholder="请填写您的宝贵意见，不超过140字"></ui-textarea>
+            </ui-view>
+        </ui-view>
+        <ui-view class="sample_title">
+            我们会保护好您的敏感信息，只用于礼品发放
+            <ui-text class="right"></ui-text>
+        </ui-view>
+        <ui-view>
+            <ui-view>
+                <ui-input ui:model="{{ name }}" class="input" show-clear="false" placeholder="输入您的姓名" maxlength="6"></ui-input>
+                <ui-input ui:model="{{ phone }}" class="input" show-clear="false" placeholder="输入您的手机号" maxlength="11"></ui-input>
+            </ui-view>
+        </ui-view>
+        <ui-view class="win">
+            <ui-button type="primary" loading="{{isLoading}}" bindtap="submitHandler" disabled="{{isDisable}}">
+                {{buttonText}}
+            </ui-button>
+        </ui-view>
+
+    </ui-page>
+</template>
+
+<script>
+    export default {
+        config: {
+            navigationBarTitleText: "满意度回访"
+        },
+        data() {
+            return {
+                buttonText: "提交",
+                isLoading: false,
+                isDisable: false,
+                starResult1: "",
+                result1: "",
+                starResult2: "",
+                result2: "",
+                starResult3: "",
+                result3: "",
+                starResult4: "",
+                result4: "",
+                starResult5: "",
+                result5: "",
+                starResult6: "",
+                result6: "",
+                content: "",
+                name: "",
+                phone: ""
+            }
+        },
+        methods: {
+            handleStar1(index) {
+                this.result1 = index
+                if (index === 1) {
+                    this.starResult1 = '非常差，不会再来'
+                } else if (index === 2) {
+                    this.starResult1 = '感觉很一般'
+                } else if (index === 3) {
+                    this.starResult1 = '满意，感觉不错'
+                } else if (index === 4) {
+                    this.starResult1 = '很满意，下次还要来'
+                } else if (index === 5) {
+                    this.starResult1 = '非常棒，值得推荐给朋友'
+                }
+            },
+            handleStar2(index) {
+                this.result2 = index
+
+                if (index === 1) {
+                    this.starResult2 = '非常差，不会再来'
+                } else if (index === 2) {
+                    this.starResult2 = '感觉很一般'
+                } else if (index === 3) {
+                    this.starResult2 = '满意，感觉不错'
+                } else if (index === 4) {
+                    this.starResult2 = '很满意，下次还要来'
+                } else if (index === 5) {
+                    this.starResult2 = '非常棒，值得推荐给朋友'
+                }
+            },
+            handleStar3(index) {
+                this.result3 = index
+
+                if (index === 1) {
+                    this.starResult3 = '非常差，不会再来'
+                } else if (index === 2) {
+                    this.starResult3 = '感觉很一般'
+                } else if (index === 3) {
+                    this.starResult3 = '满意，感觉不错'
+                } else if (index === 4) {
+                    this.starResult3 = '很满意，下次还要来'
+                } else if (index === 5) {
+                    this.starResult3 = '非常棒，值得推荐给朋友'
+                }
+            },
+            handleStar4(index) {
+                this.result4 = index
+                if (index === 1) {
+                    this.starResult4 = '非常差，不会再来'
+                } else if (index === 2) {
+                    this.starResult4 = '感觉很一般'
+                } else if (index === 3) {
+                    this.starResult4 = '满意，感觉不错'
+                } else if (index === 4) {
+                    this.starResult4 = '很满意，下次还要来'
+                } else if (index === 5) {
+                    this.starResult4 = '非常棒，值得推荐给朋友'
+                }
+            },
+            handleStar5(index) {
+                this.result5 = index
+                if (index === 1) {
+                    this.starResult5 = '非常差，不会再来'
+                } else if (index === 2) {
+                    this.starResult5 = '感觉很一般'
+                } else if (index === 3) {
+                    this.starResult5 = '满意，感觉不错'
+                } else if (index === 4) {
+                    this.starResult5 = '很满意，下次还要来'
+                } else if (index === 5) {
+                    this.starResult5 = '非常棒，值得推荐给朋友'
+                }
+            },
+            handleStar6(index) {
+                this.result6 = index
+                if (index === 1) {
+                    this.starResult6 = '非常差，不会再来'
+                } else if (index === 2) {
+                    this.starResult6 = '感觉很一般'
+                } else if (index === 3) {
+                    this.starResult6 = '满意，感觉不错'
+                } else if (index === 4) {
+                    this.starResult6 = '很满意，下次还要来'
+                } else if (index === 5) {
+                    this.starResult6 = '非常棒，值得推荐给朋友'
+                }
+            },
+            submitHandler() {
+                this.isLoading = true
+                this.buttonText = '提交中...'
+                this.isDisable = true
+                var that = this
+                ui.request({
+                    url: 'http://localhost:8080/api/review/addReview', //仅为示例，并非真实的接口地址
+                    data: {
+                        starResult1: that.result1,
+                        starResult2: that.result2,
+                        starResult3: that.result3,
+                        starResult4: that.result4,
+                        starResult5: that.result5,
+                        starResult6: that.result6,
+                        content: that.content,
+                        name: that.name,
+                        phone: that.phone
+                    },
+                    method:"POST",
+                    header: {
+                        'content-type': 'application/json'
+                    },
+                    success: function (res) {
+                        console.log(res.data)
+                        that.isLoading = false
+                        that.buttonText = '提交'
+                        that.isDisable = false
+                    }
+                })
+
+
+            }
+        },
+        mounted() {
+
+        }
+    }
+</script>
+
+<style lang="less">
+    .star-demo {
+        margin-left: 20px;
+        padding-top: 10px;
+    }
+
+    .sample_title {
+        background-color: #f8f8f8;
+        .right {
+            float: right;
+            padding-right: 10px;
+        }
+    }
+
+    .win {
+        margin: 20px;
+    }
+
+    .input {
+        margin: 20px;
+        width: 665rpx;
+    }
+</style>
