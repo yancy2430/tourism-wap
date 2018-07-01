@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="05b25004-c9b9-42c0-a6ca-7a26c8ff6bb9" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/review/review.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.ui" beforeDir="false" afterPath="$PROJECT_DIR$/app.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/review/review.ui" beforeDir="false" afterPath="$PROJECT_DIR$/pages/review/review.ui" afterDir="false" />
     </list>
     <ignored path="touchui.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,7 +31,7 @@
       <file leaf-file-name="detail.ui" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/product/detail.ui">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
+            <state relative-caret-position="12138">
               <caret line="578" selection-start-line="578" selection-end-line="578" />
               <folding>
                 <element signature="n#style#0;n#ui-ex-swiper#0;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
@@ -43,8 +43,8 @@
       <file leaf-file-name="review.ui" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/review/review.ui">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
-              <caret line="199" selection-start-line="199" selection-end-line="199" />
+            <state relative-caret-position="126">
+              <caret line="252" selection-start-line="252" selection-end-line="252" />
             </state>
           </provider>
         </entry>
@@ -125,8 +125,8 @@
     <servers />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="119" />
-    <option name="y" value="23" />
+    <option name="x" value="293" />
+    <option name="y" value="34" />
     <option name="width" value="1147" />
     <option name="height" value="809" />
   </component>
@@ -188,8 +188,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
-    <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -217,7 +216,8 @@
       <workItem from="1529834487186" duration="5895000" />
       <workItem from="1529899555310" duration="5278000" />
       <workItem from="1530020119604" duration="58000" />
-      <workItem from="1530173121759" duration="9476000" />
+      <workItem from="1530173121759" duration="12514000" />
+      <workItem from="1530274848142" duration="17000" />
     </task>
     <task id="LOCAL-00001" summary="提交">
       <created>1530173275277</created>
@@ -233,30 +233,37 @@
       <option name="project" value="LOCAL" />
       <updated>1530235249780</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="添加点评">
+      <created>1530257384664</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1530257384664</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20736000" />
+    <option name="totallyTimeSpent" value="23791000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="119" y="23" width="1147" height="809" extended-state="0" />
+    <frame x="293" y="34" width="1147" height="809" extended-state="0" />
     <editor active="true" />
     <layout>
+      <window_info anchor="right" id="Remote Host" order="3" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17375566" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3286517" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="right" id="Remote Host" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17104073" />
-      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -281,7 +288,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="提交" />
-    <option name="LAST_COMMIT_MESSAGE" value="提交" />
+    <MESSAGE value="添加点评" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加点评" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -292,137 +300,9 @@
     <entry file="file://$PROJECT_DIR$/main.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.ui">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/product/perfect.ui">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1050">
-          <caret line="50" column="28" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
-          <folding>
-            <element signature="n#style#0;n#ui-stepper#0;n#ui-view#0;n#ui-view#1;n#ui-view#2;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-stepper#0;n#ui-view#1;n#ui-view#1;n#ui-view#2;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-stepper#0;n#ui-view#2;n#ui-view#1;n#ui-view#2;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-input#0;n#ui-row#0;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-input#0;n#ui-row#1;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-input#1;n#ui-row#1;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-text#0;n#ui-row#0;n#ui-row-list#0;n#ui-view#5;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-input#0;n#ui-row#0;n#ui-row-list#0;n#ui-view#5;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-text#0;n#ui-row#1;n#ui-row-list#0;n#ui-view#5;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-input#0;n#ui-row#1;n#ui-row-list#0;n#ui-view#5;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-view#6;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-text#0;n#ui-view#0;n#ui-col#0;n#ui-row#0;n#ui-view#7;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-text#1;n#ui-view#0;n#ui-col#0;n#ui-row#0;n#ui-view#7;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/product/detail.ui">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12012">
-          <caret line="572" column="23" selection-start-line="572" selection-start-column="23" selection-end-line="572" selection-end-column="23" />
-          <folding>
-            <element signature="n#style#0;n#ui-ex-swiper#0;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.ui">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/product/perfect.ui">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1050">
-          <caret line="50" column="28" lean-forward="true" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
-          <folding>
-            <element signature="n#style#0;n#ui-stepper#0;n#ui-view#0;n#ui-view#1;n#ui-view#2;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-stepper#0;n#ui-view#1;n#ui-view#1;n#ui-view#2;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-stepper#0;n#ui-view#2;n#ui-view#1;n#ui-view#2;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-input#0;n#ui-row#0;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-input#0;n#ui-row#1;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-input#1;n#ui-row#1;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-text#0;n#ui-row#0;n#ui-row-list#0;n#ui-view#5;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-input#0;n#ui-row#0;n#ui-row-list#0;n#ui-view#5;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-text#0;n#ui-row#1;n#ui-row-list#0;n#ui-view#5;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-input#0;n#ui-row#1;n#ui-row-list#0;n#ui-view#5;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-view#6;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-text#0;n#ui-view#0;n#ui-col#0;n#ui-row#0;n#ui-view#7;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-text#1;n#ui-view#0;n#ui-col#0;n#ui-row#0;n#ui-view#7;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/product/detail.ui">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12012">
-          <caret line="572" column="23" lean-forward="true" selection-start-line="572" selection-start-column="23" selection-end-line="572" selection-end-column="23" />
-          <folding>
-            <element signature="n#style#0;n#ui-ex-swiper#0;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.ui">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/product/detail.ui">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23667">
-          <caret line="1127" column="9" lean-forward="true" selection-start-line="1127" selection-start-column="9" selection-end-line="1127" selection-end-column="9" />
-          <folding>
-            <element signature="n#style#0;n#ui-ex-swiper#0;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.ui">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/product/perfect.ui">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1050">
-          <caret line="50" column="28" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
-          <folding>
-            <element signature="n#style#0;n#ui-stepper#0;n#ui-view#0;n#ui-view#1;n#ui-view#2;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-stepper#0;n#ui-view#1;n#ui-view#1;n#ui-view#2;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-stepper#0;n#ui-view#2;n#ui-view#1;n#ui-view#2;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-input#0;n#ui-row#0;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-input#0;n#ui-row#1;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-input#1;n#ui-row#1;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-text#0;n#ui-row#0;n#ui-row-list#0;n#ui-view#5;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-input#0;n#ui-row#0;n#ui-row-list#0;n#ui-view#5;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-text#0;n#ui-row#1;n#ui-row-list#0;n#ui-view#5;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-input#0;n#ui-row#1;n#ui-row-list#0;n#ui-view#5;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-view#6;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-text#0;n#ui-view#0;n#ui-col#0;n#ui-row#0;n#ui-view#7;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ui-text#1;n#ui-view#0;n#ui-col#0;n#ui-row#0;n#ui-view#7;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.ui">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1257" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/product/detail.ui">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
+        <state relative-caret-position="12138">
           <caret line="578" selection-start-line="578" selection-end-line="578" />
           <folding>
             <element signature="n#style#0;n#ui-ex-swiper#0;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
@@ -430,10 +310,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pages/product/perfect.ui">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1050">
+          <caret line="50" column="28" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
+          <folding>
+            <element signature="n#style#0;n#ui-stepper#0;n#ui-view#0;n#ui-view#1;n#ui-view#2;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-stepper#0;n#ui-view#1;n#ui-view#1;n#ui-view#2;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-stepper#0;n#ui-view#2;n#ui-view#1;n#ui-view#2;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-input#0;n#ui-row#0;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-input#0;n#ui-row#1;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-input#1;n#ui-row#1;n#ui-row-list#0;n#ui-view#4;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-text#0;n#ui-row#0;n#ui-row-list#0;n#ui-view#5;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-input#0;n#ui-row#0;n#ui-row-list#0;n#ui-view#5;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-text#0;n#ui-row#1;n#ui-row-list#0;n#ui-view#5;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-input#0;n#ui-row#1;n#ui-row-list#0;n#ui-view#5;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-view#6;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-text#0;n#ui-view#0;n#ui-col#0;n#ui-row#0;n#ui-view#7;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ui-text#1;n#ui-view#0;n#ui-col#0;n#ui-row#0;n#ui-view#7;n#ui-page#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pages/review/review.ui">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="199" selection-start-line="199" selection-end-line="199" />
+        <state relative-caret-position="126">
+          <caret line="252" selection-start-line="252" selection-end-line="252" />
         </state>
       </provider>
     </entry>

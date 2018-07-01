@@ -60,7 +60,7 @@ export default {
         }
       ]
     },
-    networkBaseUrl: "http://localhost:8080"
+    networkBaseUrl: "http://admin.icsw.cn:8080/"
   },
   data() {
     return {

@@ -58,7 +58,7 @@
             </ui-view>
         </ui-view>
         <ui-view class="sample_title">
-            我们会保护好您的敏感信息，只用于礼品发放
+            我们会保护好您的个人信息，只用于礼券发放
             <ui-text class="right"></ui-text>
         </ui-view>
         <ui-view>
@@ -196,7 +196,7 @@
                 this.isDisable = true
                 var that = this
                 ui.request({
-                    url: 'http://localhost:8080/api/review/addReview', //仅为示例，并非真实的接口地址
+                    url: 'api/review/addReview', //
                     data: {
                         starResult1: that.result1,
                         starResult2: that.result2,
@@ -212,7 +212,7 @@
                         'content-type': 'application/json'
                     },
                     success: function (res) {
-                        console.log(res.data)
+                        if (res.data.code==0) {
                         ui.showToast({ title: '提交成功', icon: 'success' })
                         that.isLoading = false
                         that.buttonText = '提交'
@@ -232,10 +232,11 @@
                         that.content= ""
                         that.name = ""
                         that.phone= ""
+                        }else{
+                            ui.showToast({ title: res.data.data, icon: 'error' })
+                        }
                     }
                 })
-
-
             }
         },
         mounted() {
@@ -252,6 +253,7 @@
 
     .sample_title {
         background-color: #f8f8f8;
+        font-size: 16px;
         .right {
             float: right;
             padding-right: 10px;
